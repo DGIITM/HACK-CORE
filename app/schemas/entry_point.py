@@ -24,11 +24,26 @@ class FarmerRequest(BaseModel):
 
 
 class EntryPointInput(BaseModel):
-    """Raw capture from the chat/voice/photo UI, before M1 structures it."""
+    """Raw capture from the chat/voice/photo UI, before M1 structures it.
+
+    Audio and photo travel as base64 inside this same JSON body (not
+    multipart) so the existing text-only callers/tests keep working
+    unchanged — every media field is optional and additive.
+
+    crop is an advisory hint only: the real (Gemini) extraction path
+    determines crop itself from the text/photo rather than trusting a
+    client claim, the same "don't trust an unverifiable client
+    assertion" call M7 made for batch_verified. It's still used as a
+    best-effort default in the deterministic fallback path, which has no
+    real extraction capability of its own.
+    """
 
     raw_text: Optional[str] = None
-    crop: Optional[str] = "wheat"
+    crop: Optional[str] = None
     district: str = "Ludhiana"
     state: str = "Punjab"
     language: str = "pa"
-    has_photo: bool = False
+    audio_base64: Optional[str] = None
+    audio_mime_type: Optional[str] = "audio/webm"
+    photo_base64: Optional[str] = None
+    photo_mime_type: Optional[str] = "image/jpeg"

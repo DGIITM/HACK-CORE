@@ -16,6 +16,9 @@
   .bubble-farmer { background: #d8f3dc; margin-left: auto; }
   .bubble-bot { background: #e9ecef; margin-right: auto; }
   .badge-confidence { font-size: 0.75rem; }
+  .mic-btn.recording { background: #dc3545; border-color: #dc3545; color: #fff; animation: pulse 1.2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
+  .photo-preview { max-height: 4rem; border-radius: 0.5rem; }
 </style>
 </head>
 <body>
@@ -93,6 +96,14 @@
           </div>
 
           <div class="card-footer">
+            <div v-if="photoPreviewUrl || pendingAudioBase64" class="d-flex align-items-center gap-2 mb-2">
+              <img v-if="photoPreviewUrl" :src="photoPreviewUrl" class="photo-preview" alt="attached photo" />
+              <span v-if="pendingAudioBase64" class="badge bg-secondary">🎤 voice message recorded</span>
+              <button type="button" class="btn btn-sm btn-outline-secondary" @click="clearAttachments">
+                Remove
+              </button>
+            </div>
+            <div v-if="micError" class="text-danger small mb-2">{{ micError }}</div>
             <form class="d-flex gap-2" @submit.prevent="sendMessage">
               <input
                 class="form-control"
@@ -100,7 +111,37 @@
                 placeholder="Describe what you're seeing in your field..."
                 :disabled="loading"
               />
-              <button class="btn btn-success" type="submit" :disabled="loading || !userInput.trim()">
+              <input
+                ref="photoInput"
+                type="file"
+                accept="image/*"
+                class="d-none"
+                @change="onPhotoSelected"
+              />
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                title="Attach a photo"
+                :disabled="loading"
+                @click="$refs.photoInput.click()"
+              >
+                📷
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary mic-btn"
+                :class="{ recording: recording }"
+                :title="recording ? 'Stop recording' : 'Record a voice message'"
+                :disabled="loading"
+                @click="toggleRecording"
+              >
+                🎤
+              </button>
+              <button
+                class="btn btn-success"
+                type="submit"
+                :disabled="loading || (!userInput.trim() && !pendingAudioBase64 && !pendingPhotoBase64)"
+              >
                 Send
               </button>
             </form>
@@ -108,8 +149,10 @@
         </div>
 
         <p class="text-muted small mt-3 mb-0">
-          Skeleton build — every response above is stub/fake data wired through
-          the real M1 → M4 data contract. No live model calls yet.
+          M1, M2, M4, M7, and M8 run real logic against real Gemini/Qdrant/
+          statsmodels calls where GCP credentials are configured, and fall
+          back to honestly-labeled deterministic logic where they aren't —
+          never fabricated data either way. M5, M6, and M9 are still stubs.
         </p>
       </div>
     </div>
@@ -129,29 +172,146 @@ createApp({
       district: "Ludhiana",
       messages: [],
       loading: false,
+      recording: false,
+      micError: "",
+      mediaRecorder: null,
+      audioChunks: [],
+      pendingAudioBase64: null,
+      pendingAudioMimeType: null,
+      pendingPhotoBase64: null,
+      pendingPhotoMimeType: null,
+      photoPreviewUrl: null,
     };
   },
   methods: {
+    blobToBase64(blob) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result.split(",")[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
+    },
+
+    async toggleRecording() {
+      this.micError = "";
+      if (this.recording) {
+        this.mediaRecorder.stop();
+        this.recording = false;
+        return;
+      }
+      if (!navigator.mediaDevices || !window.MediaRecorder) {
+        this.micError = "Voice recording isn't supported in this browser.";
+        return;
+      }
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const mimeType = MediaRecorder.isTypeSupported("audio/webm") ? "audio/webm" : "";
+        this.mediaRecorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
+        this.audioChunks = [];
+        this.mediaRecorder.ondataavailable = (e) => {
+          if (e.data.size > 0) this.audioChunks.push(e.data);
+        };
+        this.mediaRecorder.onstop = async () => {
+          stream.getTracks().forEach((t) => t.stop());
+          const blob = new Blob(this.audioChunks, { type: this.mediaRecorder.mimeType || "audio/webm" });
+          this.pendingAudioBase64 = await this.blobToBase64(blob);
+          this.pendingAudioMimeType = blob.type || "audio/webm";
+        };
+        this.mediaRecorder.start();
+        this.recording = true;
+      } catch (err) {
+        this.micError = "Couldn't access the microphone: " + err.message;
+      }
+    },
+
+    compressImage(file, maxDim = 1024, quality = 0.7) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onerror = reject;
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onerror = reject;
+          img.onload = () => {
+            let { width, height } = img;
+            if (width > maxDim || height > maxDim) {
+              const scale = maxDim / Math.max(width, height);
+              width = Math.round(width * scale);
+              height = Math.round(height * scale);
+            }
+            const canvas = document.createElement("canvas");
+            canvas.width = width;
+            canvas.height = height;
+            canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+            // CLAUDE.md: keep Gemini requests under 20MB — compress before sending.
+            const dataUrl = canvas.toDataURL("image/jpeg", quality);
+            resolve({ base64: dataUrl.split(",")[1], mimeType: "image/jpeg", dataUrl });
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    },
+
+    async onPhotoSelected(event) {
+      const file = event.target.files[0];
+      event.target.value = "";
+      if (!file) return;
+      const compressed = await this.compressImage(file);
+      this.pendingPhotoBase64 = compressed.base64;
+      this.pendingPhotoMimeType = compressed.mimeType;
+      this.photoPreviewUrl = compressed.dataUrl;
+    },
+
+    clearAttachments() {
+      this.pendingAudioBase64 = null;
+      this.pendingAudioMimeType = null;
+      this.pendingPhotoBase64 = null;
+      this.pendingPhotoMimeType = null;
+      this.photoPreviewUrl = null;
+    },
+
     async sendMessage() {
       const text = this.userInput.trim();
-      if (!text) return;
+      const hasAudio = !!this.pendingAudioBase64;
+      const hasPhoto = !!this.pendingPhotoBase64;
+      if (!text && !hasAudio && !hasPhoto) return;
 
-      this.messages.push({ from: "farmer", text });
+      const bubbleParts = [];
+      if (text) bubbleParts.push(text);
+      if (hasAudio) bubbleParts.push("🎤 voice message");
+      if (hasPhoto) bubbleParts.push("📷 photo attached");
+      this.messages.push({ from: "farmer", text: bubbleParts.join(" — ") });
+
+      const requestBody = {
+        raw_text: text || null,
+        district: this.district,
+        state: "Punjab",
+        language: this.language,
+      };
+      if (hasAudio) {
+        requestBody.audio_base64 = this.pendingAudioBase64;
+        requestBody.audio_mime_type = this.pendingAudioMimeType;
+      }
+      if (hasPhoto) {
+        requestBody.photo_base64 = this.pendingPhotoBase64;
+        requestBody.photo_mime_type = this.pendingPhotoMimeType;
+      }
+
       this.userInput = "";
+      this.clearAttachments();
       this.loading = true;
 
       try {
         const entryRes = await fetch("/entry-point", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            raw_text: text,
-            district: this.district,
-            state: "Punjab",
-            language: this.language,
-            has_photo: false,
-          }),
+          body: JSON.stringify(requestBody),
         });
+        if (!entryRes.ok) {
+          const errBody = await entryRes.json().catch(() => ({}));
+          throw new Error(errBody.detail || `entry-point failed (${entryRes.status})`);
+        }
         const farmerRequest = await entryRes.json();
 
         const recRes = await fetch("/recommend", {
@@ -167,7 +327,7 @@ createApp({
           from: "bot",
           recommendation: {
             no_confident_match: true,
-            plain_language_reason: "Something went wrong talking to the server: " + err,
+            plain_language_reason: "Something went wrong talking to the server: " + err.message,
           },
         });
       } finally {
