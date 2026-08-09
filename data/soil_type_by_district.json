@@ -1,0 +1,27 @@
+{
+  "data_basis": "placeholder — approximate dominant soil texture per district, stand-in for the live satellite/soil-sensor data described in CLAUDE.md",
+  "source_note": "Compiled from public Punjab soil-classification references (Dept. of Soil & Water Conservation Punjab; Punjab PCS geography notes): south-western districts are dominated by calcareous/desert (sandy) soils, central Punjab ranges sandy loam to clay loam, and the sub-mountainous north-east tends toward loam to clay.",
+  "records": {
+    "Ludhiana": "sandy loam",
+    "Amritsar": "loam",
+    "Jalandhar": "sandy loam",
+    "Patiala": "clay loam",
+    "Bathinda": "sandy",
+    "Sangrur": "sandy loam",
+    "Ferozepur": "sandy",
+    "Moga": "sandy loam",
+    "Fatehgarh Sahib": "clay loam",
+    "Gurdaspur": "loam",
+    "Hoshiarpur": "loam",
+    "Kapurthala": "sandy loam",
+    "Mansa": "sandy",
+    "Muktsar": "sandy",
+    "Rupnagar": "loam",
+    "SAS Nagar Mohali": "loam",
+    "Faridkot": "sandy",
+    "Fazilka": "sandy",
+    "Barnala": "sandy loam",
+    "Tarn Taran": "loam",
+    "Pathankot": "loam"
+  }
+}

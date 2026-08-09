@@ -1,0 +1,19 @@
+{
+  "data_basis": "simulated — mock QR/batch registry for the M7 counterfeit-check trust feature; not connected to any real manufacturer's database",
+  "records": [
+    { "batch_number": "TRV-2026-00417", "product_name": "Trichoderma viride bio-fungicide", "manufacturer": "AgriBio Solutions Pvt Ltd", "mfg_date": "2026-01-10", "expiry_date": "2027-07-10" },
+    { "batch_number": "THS-2026-00812", "product_name": "Trichoderma harzianum seed treatment", "manufacturer": "Rhizon Biotech", "mfg_date": "2025-11-05", "expiry_date": "2027-05-05" },
+    { "batch_number": "PSF-2026-00193", "product_name": "Pseudomonas fluorescens bio-inoculant", "manufacturer": "GreenGuard Biologicals", "mfg_date": "2026-02-01", "expiry_date": "2027-02-01" },
+    { "batch_number": "PSF-2026-00944", "product_name": "Pseudomonas fluorescens foliar spray", "manufacturer": "GreenGuard Biologicals", "mfg_date": "2026-01-20", "expiry_date": "2027-01-20" },
+    { "batch_number": "BSS-2026-00256", "product_name": "Bacillus subtilis seed treatment", "manufacturer": "PunjabAgro Biosciences", "mfg_date": "2025-12-15", "expiry_date": "2027-06-15" },
+    { "batch_number": "BAF-2026-00370", "product_name": "Bacillus amyloliquefaciens bio-fungicide", "manufacturer": "TerraGrow Biosciences", "mfg_date": "2026-01-05", "expiry_date": "2027-01-05" },
+    { "batch_number": "BTP-2026-00681", "product_name": "Bacillus thuringiensis (Bt) bio-pesticide", "manufacturer": "AgriBio Solutions Pvt Ltd", "mfg_date": "2025-10-22", "expiry_date": "2027-04-22" },
+    { "batch_number": "BBP-2026-00129", "product_name": "Beauveria bassiana bio-pesticide", "manufacturer": "Rhizon Biotech", "mfg_date": "2026-01-18", "expiry_date": "2027-01-18" },
+    { "batch_number": "MAP-2026-00755", "product_name": "Metarhizium anisopliae bio-pesticide", "manufacturer": "Rhizon Biotech", "mfg_date": "2025-11-30", "expiry_date": "2027-05-30" },
+    { "batch_number": "NBP-2026-00042", "product_name": "Neem-based bio-pesticide (Azadirachtin)", "manufacturer": "PunjabAgro Biosciences", "mfg_date": "2026-02-10", "expiry_date": "2027-08-10" },
+    { "batch_number": "VLB-2026-00509", "product_name": "Verticillium lecanii bio-pesticide", "manufacturer": "GreenGuard Biologicals", "mfg_date": "2025-12-01", "expiry_date": "2027-06-01" },
+    { "batch_number": "NPV-2026-00311", "product_name": "NPV (Nuclear Polyhedrosis Virus) bio-pesticide", "manufacturer": "TerraGrow Biosciences", "mfg_date": "2026-01-25", "expiry_date": "2026-07-25" },
+    { "batch_number": "TPC-2026-00088", "product_name": "Trichoderma viride + PGPR consortium", "manufacturer": "AgriBio Solutions Pvt Ltd", "mfg_date": "2026-01-08", "expiry_date": "2027-01-08" },
+    { "batch_number": "MYC-2026-00623", "product_name": "Mycorrhiza (VAM) root inoculant", "manufacturer": "TerraGrow Biosciences", "mfg_date": "2025-12-20", "expiry_date": "2027-12-20" }
+  ]
+}
