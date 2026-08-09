@@ -70,6 +70,9 @@
             >
               <div v-if="m.from === 'farmer'">{{ m.text }}</div>
               <div v-else>
+                <div v-if="m.riskContext && !m.riskContext.should_proceed" class="alert alert-warning py-1 px-2 small mb-2">
+                  ⚠️ {{ m.riskContext.early_warning }}
+                </div>
                 <div
                   class="mt-1"
                   :class="m.recommendation.no_confident_match ? 'fw-semibold text-warning-emphasis' : ''"
@@ -328,10 +331,17 @@ createApp({
         }
         const farmerRequest = await entryRes.json();
 
+        const riskRes = await fetch("/risk-context", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(farmerRequest),
+        });
+        const riskContext = riskRes.ok ? await riskRes.json() : null;
+
         const recRes = await fetch("/recommend", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ farmer_request: farmerRequest }),
+          body: JSON.stringify({ farmer_request: farmerRequest, risk_context: riskContext }),
         });
         const recommendation = await recRes.json();
 
@@ -346,7 +356,7 @@ createApp({
         });
         const delivery = await deliverRes.json();
 
-        this.messages.push({ from: "bot", recommendation, delivery });
+        this.messages.push({ from: "bot", recommendation, delivery, riskContext });
       } catch (err) {
         this.messages.push({
           from: "bot",
