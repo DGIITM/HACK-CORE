@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     LLM_PROVIDER: str = "gemini"
     GOOGLE_APPLICATION_CREDENTIALS: str = ""
     GOOGLE_CLOUD_PROJECT: str = ""
+    VERTEX_AI_LOCATION: str = "us-central1"
 
     # STUB: Firestore is the decided datastore (see CLAUDE.md tech stack
     # table) — no SQL engine is configured in this skeleton pass because
