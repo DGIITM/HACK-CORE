@@ -39,6 +39,10 @@ def log_outcome(payload: OutcomeLogInput) -> OutcomeLog:
         "application_date": payload.application_date,
         "observed_outcome": payload.observed_outcome,
         "yield_result": payload.yield_result,
+        # Persisted for M9's get_confidence_boost()/get_outcomes_by_district()
+        # to query — not part of OutcomeLog's own contract, so it's simply
+        # dropped (pydantic ignores unknown keys) when building the response below.
+        "district": payload.district,
     }
 
     doc_id = f"{payload.farmer_id}-{uuid.uuid4().hex[:8]}"

@@ -126,6 +126,36 @@ def get_outcome(doc_id: str) -> Optional[Dict]:
     return data
 
 
+def _all_records() -> List[Dict]:
+    _init_db()
+    conn = sqlite3.connect(DB_PATH)
+    rows = conn.execute("SELECT payload, synced FROM outcome_logs").fetchall()
+    conn.close()
+    records = []
+    for payload, synced in rows:
+        data = json.loads(payload)
+        data["synced"] = bool(synced)
+        records.append(data)
+    return records
+
+
+def get_outcomes(product_name: str, district: Optional[str] = None) -> List[Dict]:
+    """All locally-cached outcome records for a product, optionally
+    narrowed to a district — this is what M9's running-average
+    confidence boost reads from. Small local-scan query; fine at this
+    dataset's size, same tradeoff already made throughout M2/M7/M8."""
+    records = [r for r in _all_records() if r.get("product_used") == product_name]
+    if district is not None:
+        records = [r for r in records if r.get("district") == district]
+    return records
+
+
+def get_outcomes_by_district(district: str) -> List[Dict]:
+    """All locally-cached outcome records for a district, regardless of
+    product — feeds M9's get_retailer_evidence()."""
+    return [r for r in _all_records() if r.get("district") == district]
+
+
 def list_pending() -> List[str]:
     """doc_ids queued locally but not yet confirmed to Firestore."""
     _init_db()

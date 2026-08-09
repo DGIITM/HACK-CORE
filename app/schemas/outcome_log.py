@@ -10,6 +10,8 @@ India's agrochemical market is non-genuine... a fake product failing
 would otherwise be recorded by M8 as a genuine product failing"). The
 server verifies batch_number against M2's check_batch() itself.
 """
+from typing import Optional
+
 from pydantic import BaseModel
 
 
@@ -20,6 +22,13 @@ class OutcomeLogInput(BaseModel):
     application_date: str
     observed_outcome: str
     yield_result: float
+    # Not part of CLAUDE.md's locked OutcomeLog output contract (added
+    # only here, on the input), and not returned in the response either
+    # — it's threaded into the internally persisted record so M9's
+    # get_confidence_boost(product_name, district) has something real to
+    # key against. Optional: a log without it just won't be district-
+    # filterable later, not rejected.
+    district: Optional[str] = None
 
 
 class OutcomeLog(BaseModel):

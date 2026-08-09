@@ -3,27 +3,52 @@
 Depth piece #2. Hard constraint from CLAUDE.md: never overclaim precision
 — always report a range, never a single confident number.
 
-M7 (Application & Logging) doesn't persist real outcome logs yet, so
-there's no per-farmer data to attribute yet. Until it does, this returns
-the difference-in-differences model's current population-level estimate
-for the product overall (fit on the synthetic panel in impact_data.py),
-not a per-farmer causal estimate — req.farmer_id / req.product_used are
-accepted for API-contract stability but can't meaningfully filter
-anything real yet. That's honest given what data actually exists; the
-data itself is synthetic (see impact_data.py's documented ground truth),
-but the DiD *model* running on it is real, same distinction M2 already
-established for its own placeholder data.
+M7 now persists real outcome logs, but there's no way yet to attribute a
+specific farmer's yield to this product versus what would've happened
+anyway (that needs matched control data this demo doesn't have). Until
+then, this returns the difference-in-differences model's current
+population-level estimate for the product overall (fit on the synthetic
+panel in impact_data.py), not a per-farmer causal estimate — that's
+honest given what data actually exists; the data itself is synthetic
+(see impact_data.py's documented ground truth), but the DiD *model*
+running on it is real, same distinction M2 already established for its
+own placeholder data.
+
+Each computed estimate is persisted (last N per product/district key —
+see _persist_estimate/get_recent_estimates below) so M9's
+get_confidence_boost() has something real to read, per that module's
+step-1 instruction. Process-lifetime, in-memory only — same tradeoff
+already made by this module's own DiD-result cache and M4's retrieval
+index; nothing in this single-process demo needs cross-restart
+durability for it.
 """
 import json
 import logging
+from collections import defaultdict, deque
+from typing import Dict, List, Optional, Tuple
 
 from app.schemas.impact import ImpactEstimate, ImpactRequest
 from app.services import impact_data, llm_service
 
 logger = logging.getLogger(__name__)
 
-# STUB: M9 (Feedback Loop) would eventually feed real outcome logs back
-# into this model once M7 exists, replacing the synthetic panel below.
+MAX_STORED_ESTIMATES_PER_KEY = 5
+_recent_estimates: Dict[Tuple[str, Optional[str]], "deque[dict]"] = defaultdict(
+    lambda: deque(maxlen=MAX_STORED_ESTIMATES_PER_KEY)
+)
+
+
+def _persist_estimate(product_used: Optional[str], district: Optional[str], estimate: dict) -> None:
+    if not product_used:
+        return  # nothing meaningful to key by
+    _recent_estimates[(product_used, district)].append(estimate)
+
+
+def get_recent_estimates(product_name: str, district: Optional[str] = None) -> List[dict]:
+    """Last few computed impact estimates for a (product, district) key.
+    Empty list, not an error, when nothing's been computed for that key
+    yet."""
+    return list(_recent_estimates.get((product_name, district), []))
 
 SYSTEM_PROMPT = """You are KrishiSathi's impact-reporting assistant.
 
@@ -128,5 +153,7 @@ def measure_impact(req: ImpactRequest) -> ImpactEstimate:
     except (json.JSONDecodeError, ValueError) as exc:
         logger.warning("Gemini impact narration could not be parsed, using computed values: %s", exc)
         final = computed
+
+    _persist_estimate(req.product_used, req.district, final)
 
     return ImpactEstimate(**final)

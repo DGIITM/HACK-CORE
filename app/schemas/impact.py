@@ -12,6 +12,10 @@ from pydantic import BaseModel
 class ImpactRequest(BaseModel):
     farmer_id: str
     product_used: Optional[str] = None
+    # Not part of CLAUDE.md's locked ImpactEstimate output contract.
+    # Used only to key the small per-(product, district) estimate
+    # history added for M9's get_confidence_boost() to read.
+    district: Optional[str] = None
 
 
 class ImpactEstimate(BaseModel):

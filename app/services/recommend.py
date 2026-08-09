@@ -22,7 +22,7 @@ from typing import Dict, List
 
 from app.schemas.recommend import NeighbourProof, Recommendation, RecommendationRequest
 from app.schemas.entry_point import FarmerRequest
-from app.services import data_foundation, llm_service, retrieval
+from app.services import data_foundation, feedback_loop, impact_data, llm_service, outcome_store, retrieval
 
 logger = logging.getLogger(__name__)
 
@@ -102,6 +102,30 @@ def _fallback_decision(candidates: List[Dict]) -> Dict:
         "mode_of_action": PLAIN_MODE_OF_ACTION.get(top["product_name"], top["mode_of_action"]),
         "no_confident_match": confidence < 0.5,
     }
+
+
+def _real_neighbour_proof(product_name: str, district: str) -> NeighbourProof:
+    """M9 gave us real M7 outcome data to read — this replaces the old
+    hardcoded available=False now that there's something genuine to
+    report (or honestly not, when there isn't). Never fabricates a
+    neighbour count: farmers_nearby is a literal count of real logged
+    outcomes for this product/district, nothing else."""
+    outcomes = outcome_store.get_outcomes(product_name, district)
+    if not outcomes:
+        return NeighbourProof(farmers_nearby=0, avg_outcome="not enough verified outcomes yet", available=False)
+
+    yields = [float(o["yield_result"]) for o in outcomes if "yield_result" in o]
+    avg_yield = sum(yields) / len(yields) if yields else 0.0
+    above_baseline = sum(1 for y in yields if y > impact_data.BASE_YIELD_QUINTALS_PER_ACRE)
+
+    return NeighbourProof(
+        farmers_nearby=len(outcomes),
+        avg_outcome=(
+            f"average yield of {avg_yield:.1f} quintals/acre across {len(outcomes)} logged "
+            f"outcome(s), {above_baseline} above the district baseline"
+        ),
+        available=True,
+    )
 
 
 def _safe_no_match(reason: str) -> Dict:
@@ -199,18 +223,20 @@ def generate_recommendation(req: RecommendationRequest) -> Recommendation:
             logger.warning("Gemini response could not be parsed, falling back: %s", exc)
             decision = _validate_llm_choice(_fallback_decision(candidates), candidates)
 
+    # M9: a small, capped nudge from real logged positive outcomes for
+    # this product/district — exactly zero when there's no outcome data
+    # yet, never applied to an already-honest no_confident_match.
+    neighbour_proof = NeighbourProof(farmers_nearby=0, avg_outcome="not enough verified outcomes yet", available=False)
+    if not decision["no_confident_match"] and decision["recommended_product"]:
+        boost = feedback_loop.get_confidence_boost(decision["recommended_product"], district)
+        decision["confidence_score"] = min(1.0, decision["confidence_score"] + boost)
+        neighbour_proof = _real_neighbour_proof(decision["recommended_product"], district)
+
     return Recommendation(
         recommended_product=decision["recommended_product"],
         confidence_score=round(decision["confidence_score"], 2),
         plain_language_reason=decision["plain_language_reason"],
         mode_of_action=decision["mode_of_action"],
-        neighbour_proof=NeighbourProof(
-            farmers_nearby=0,
-            avg_outcome="not enough verified outcomes yet",
-            # STUB: M7 doesn't persist real outcome logs yet, so there's
-            # nothing genuine to report here. Flip to a real Firestore
-            # aggregate once M7 is real — never fabricate a neighbour count.
-            available=False,
-        ),
+        neighbour_proof=neighbour_proof,
         no_confident_match=decision["no_confident_match"],
     )
