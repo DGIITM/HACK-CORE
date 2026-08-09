@@ -68,7 +68,7 @@ def test_retailer_shape():
     assert res.status_code == 200
     body = res.json()
     assert body["district"] == "Ludhiana"
-    assert "rows" in body and "counterfeit_alerts" in body
+    assert "recent_recommendations" in body and "stock_signal" in body and "generated_at" in body
 
 
 def test_log_outcome_shape():

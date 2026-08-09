@@ -22,7 +22,7 @@ from typing import Dict, List
 
 from app.schemas.recommend import NeighbourProof, Recommendation, RecommendationRequest
 from app.schemas.entry_point import FarmerRequest
-from app.services import data_foundation, feedback_loop, impact_data, llm_service, outcome_store, retrieval
+from app.services import data_foundation, feedback_loop, impact_data, llm_service, outcome_store, recommendation_log, retrieval
 
 logger = logging.getLogger(__name__)
 
@@ -231,6 +231,10 @@ def generate_recommendation(req: RecommendationRequest) -> Recommendation:
         boost = feedback_loop.get_confidence_boost(decision["recommended_product"], district)
         decision["confidence_score"] = min(1.0, decision["confidence_score"] + boost)
         neighbour_proof = _real_neighbour_proof(decision["recommended_product"], district)
+        # M6: minimal append-only history so the retailer console has
+        # real recommendation activity to aggregate — not logged for a
+        # no_confident_match, since there's no product to attribute it to.
+        recommendation_log.log_recommendation(district, decision["recommended_product"], decision["confidence_score"])
 
     return Recommendation(
         recommended_product=decision["recommended_product"],

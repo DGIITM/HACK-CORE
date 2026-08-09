@@ -39,6 +39,25 @@
     <div class="row justify-content-center">
       <div class="col-lg-8">
 
+        <ul class="nav nav-tabs mb-3">
+          <li class="nav-item">
+            <a class="nav-link" :class="{ active: activeTab === 'chat' }" href="#" @click.prevent="activeTab = 'chat'">
+              Chat
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              :class="{ active: activeTab === 'retailer' }"
+              href="#"
+              @click.prevent="activeTab = 'retailer'; loadRetailerView()"
+            >
+              Retailer View
+            </a>
+          </li>
+        </ul>
+
+        <div v-show="activeTab === 'chat'">
         <div class="card shadow-sm">
           <div class="card-header d-flex justify-content-between align-items-center">
             <strong>Ask KrishiSathi about your crop</strong>
@@ -164,12 +183,75 @@
             </form>
           </div>
         </div>
+        </div>
+
+        <div v-show="activeTab === 'retailer'" class="card shadow-sm">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <strong>Retailer console</strong>
+            <div class="d-flex gap-2">
+              <input
+                class="form-control form-control-sm"
+                style="width:9rem"
+                v-model="retailerDistrict"
+                placeholder="District"
+                @keyup.enter="loadRetailerView"
+              />
+              <button class="btn btn-sm btn-outline-secondary" :disabled="retailerLoading" @click="loadRetailerView">
+                Refresh
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div v-if="retailerLoading" class="text-muted small">Loading…</div>
+            <template v-else-if="retailerData">
+              <div v-if="retailerData.recent_recommendations.length === 0" class="text-muted small">
+                No recommendations logged yet for {{ retailerData.district }}. Ask KrishiSathi about a
+                crop problem in this district from the Chat tab, then refresh.
+              </div>
+              <table v-else class="table table-sm align-middle">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Recommended</th>
+                    <th>Avg. confidence</th>
+                    <th>Outcomes logged</th>
+                    <th>Demand</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="row in retailerData.recent_recommendations" :key="row.product_name">
+                    <td>
+                      {{ row.product_name }}
+                      <div class="small text-muted">{{ row.avg_outcome_summary }}</div>
+                    </td>
+                    <td>{{ row.count }}</td>
+                    <td>{{ Math.round(row.avg_confidence * 100) }}%</td>
+                    <td>{{ row.outcomes_logged }}</td>
+                    <td>
+                      <span
+                        class="badge"
+                        :class="{
+                          'bg-success': demandLevelFor(row.product_name) === 'high',
+                          'bg-warning text-dark': demandLevelFor(row.product_name) === 'medium',
+                          'bg-secondary': demandLevelFor(row.product_name) === 'low',
+                        }"
+                      >
+                        {{ demandLevelFor(row.product_name) }}
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="small text-muted">Generated at {{ retailerData.generated_at }}</div>
+            </template>
+          </div>
+        </div>
 
         <p class="text-muted small mt-3 mb-0">
-          M1, M2, M4, M7, and M8 run real logic against real Gemini/Qdrant/
-          statsmodels calls where GCP credentials are configured, and fall
-          back to honestly-labeled deterministic logic where they aren't —
-          never fabricated data either way. M5, M6, and M9 are still stubs.
+          Every module runs real logic against real Gemini/Qdrant/Open-Meteo/
+          Cloud Translation/TTS/statsmodels calls where GCP credentials are
+          configured, and falls back to honestly-labeled deterministic logic
+          where they aren't — never fabricated data either way.
         </p>
       </div>
     </div>
@@ -198,9 +280,31 @@ createApp({
       pendingPhotoBase64: null,
       pendingPhotoMimeType: null,
       photoPreviewUrl: null,
+      activeTab: "chat",
+      retailerDistrict: "Ludhiana",
+      retailerData: null,
+      retailerLoading: false,
     };
   },
   methods: {
+    async loadRetailerView() {
+      this.retailerLoading = true;
+      try {
+        const res = await fetch("/retailer?district=" + encodeURIComponent(this.retailerDistrict));
+        this.retailerData = await res.json();
+      } catch (err) {
+        this.retailerData = { district: this.retailerDistrict, recent_recommendations: [], stock_signal: [], generated_at: "" };
+      } finally {
+        this.retailerLoading = false;
+      }
+    },
+
+    demandLevelFor(productName) {
+      if (!this.retailerData) return "";
+      const entry = this.retailerData.stock_signal.find((s) => s.product_name === productName);
+      return entry ? entry.demand_level : "";
+    },
+
     blobToBase64(blob) {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
