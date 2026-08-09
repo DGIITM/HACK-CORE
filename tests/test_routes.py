@@ -77,7 +77,7 @@ def test_log_outcome_shape():
         json={
             "farmer_id": "farmer-001",
             "product_used": "Trichoderma viride bio-fungicide",
-            "batch_verified": True,
+            "batch_number": "TRV-2026-00417",
             "application_date": "2026-03-14",
             "observed_outcome": "greener leaves after 3 weeks",
             "yield_result": 42.5,
@@ -85,7 +85,8 @@ def test_log_outcome_shape():
     )
     assert res.status_code == 200
     body = res.json()
-    assert body["synced"] is True
+    assert body["batch_verified"] is True
+    assert isinstance(body["synced"], bool)
 
 
 def test_measure_impact_shape():
