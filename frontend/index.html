@@ -70,26 +70,40 @@
             >
               <div v-if="m.from === 'farmer'">{{ m.text }}</div>
               <div v-else>
-                <div v-if="m.recommendation.no_confident_match" class="fw-semibold text-warning-emphasis">
-                  {{ m.recommendation.plain_language_reason || "I'm not confident enough to recommend a specific product yet." }}
-                </div>
-                <template v-else>
-                  <div class="fw-semibold">
+                <div
+                  class="mt-1"
+                  :class="m.recommendation.no_confident_match ? 'fw-semibold text-warning-emphasis' : ''"
+                >
+                  <span v-if="!m.recommendation.no_confident_match" class="fw-semibold">
                     {{ m.recommendation.recommended_product }}
                     <span class="badge bg-success badge-confidence ms-1">
                       {{ Math.round(m.recommendation.confidence_score * 100) }}% confidence
                     </span>
-                  </div>
-                  <div class="small mt-1">{{ m.recommendation.plain_language_reason }}</div>
-                  <div class="small text-muted mt-1">
-                    <strong>Why it works:</strong> {{ m.recommendation.mode_of_action }}
-                  </div>
-                  <div class="small text-muted" v-if="m.recommendation.neighbour_proof.available">
-                    <strong>Nearby:</strong>
-                    {{ m.recommendation.neighbour_proof.farmers_nearby }} farmers nearby saw
-                    {{ m.recommendation.neighbour_proof.avg_outcome }}.
-                  </div>
-                </template>
+                    <br />
+                  </span>
+                  {{ m.delivery.chat_message }}
+                </div>
+                <div class="small text-muted mt-1" v-if="m.delivery.trust_features_shown.includes('mode_of_action')">
+                  <strong>Why it works:</strong> {{ m.recommendation.mode_of_action }}
+                </div>
+                <div class="small text-muted" v-if="m.delivery.trust_features_shown.includes('neighbour_proof')">
+                  <strong>Nearby:</strong>
+                  {{ m.recommendation.neighbour_proof.farmers_nearby }} farmers nearby saw
+                  {{ m.recommendation.neighbour_proof.avg_outcome }}.
+                </div>
+                <div class="small text-muted fst-italic mt-1" v-if="m.delivery.trust_features_shown.includes('expectation_setting')">
+                  ⏳ {{ m.delivery.expectation_setting }}
+                </div>
+                <audio
+                  v-if="m.delivery.audio_url"
+                  :src="m.delivery.audio_url"
+                  controls
+                  class="mt-2 d-block"
+                  style="height:2rem;width:100%"
+                ></audio>
+                <div class="small text-muted fst-italic mt-1" v-if="m.delivery.translated_language !== language">
+                  (shown in English — translation to "{{ language }}" wasn't available in this environment)
+                </div>
               </div>
             </div>
             <div v-if="loading" class="text-muted small">KrishiSathi is thinking…</div>
@@ -321,13 +335,34 @@ createApp({
         });
         const recommendation = await recRes.json();
 
-        this.messages.push({ from: "bot", recommendation });
+        const deliverRes = await fetch("/deliver", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            recommendation: recommendation,
+            language: this.language,
+            crop: farmerRequest.crop,
+          }),
+        });
+        const delivery = await deliverRes.json();
+
+        this.messages.push({ from: "bot", recommendation, delivery });
       } catch (err) {
         this.messages.push({
           from: "bot",
           recommendation: {
             no_confident_match: true,
-            plain_language_reason: "Something went wrong talking to the server: " + err.message,
+            recommended_product: "",
+            confidence_score: 0,
+            mode_of_action: "",
+            neighbour_proof: { available: false, farmers_nearby: 0, avg_outcome: "" },
+          },
+          delivery: {
+            chat_message: "Something went wrong talking to the server: " + err.message,
+            translated_language: this.language,
+            audio_url: null,
+            expectation_setting: "",
+            trust_features_shown: [],
           },
         });
       } finally {

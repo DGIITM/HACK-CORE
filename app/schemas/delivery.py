@@ -14,6 +14,11 @@ from app.schemas.recommend import Recommendation
 class DeliveryRequest(BaseModel):
     recommendation: Recommendation
     language: str = "pa"
+    # Not part of Recommendation's own contract (CLAUDE.md doesn't include
+    # crop there), but needed here to template the expectation-setting
+    # message honestly instead of hardcoding generic text. The chat flow
+    # threads it through from M1's FarmerRequest.crop.
+    crop: Optional[str] = "wheat"
 
 
 class DeliveryResponse(BaseModel):
