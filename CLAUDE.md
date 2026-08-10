@@ -40,7 +40,7 @@ This is the *ideation phase* submission — a qualifying round. The top 3 teams 
 |---|---|---|
 | Backend | FastAPI | One shared service, one endpoint per module |
 | Hosting | Cloud Run | |
-| LLM | `gemini-2.0-flash-001` via Vertex AI | Stable GA multimodal model. Handles text + image in one call. Avoid preview models — they change under you mid-build. |
+| LLM | `gemini-3.5-flash` via the Gemini Developer API (Google AI Studio free API key) | Primary path for development and this hackathon submission — works from any dev machine with just a free key, no GCP project needed. Vertex AI (service-account auth) is the stated production path once real GCP access comes through from the mentors; kept as a fallback tier in `llm_service.py`, not removed. GA multimodal model, handles text + image in one call. Not `gemini-2.0-flash-001` — that model (CLAUDE.md's original choice) was fully retired June 1, 2026 on both API surfaces, not a preview-model churn issue but a hard deprecation. `gemini-2.5-flash` was considered as the direct replacement but itself has a stated shutdown of October 16, 2026; `gemini-3.5-flash` is GA (not preview, same principle as before) with meaningfully more runway. |
 | Speech-to-Text | Google Cloud STT | Language codes: `hi-IN`, **`pa-guru-IN`** (Gurmukhi — NOT `pa-IN`, that fails silently), `en-IN` |
 | Text-to-Speech | Google Cloud TTS, Chirp 3 HD voices | Punjabi HD voice is in Preview — test early |
 | Translation | Google Cloud Translation API | |

@@ -98,7 +98,7 @@ def test_legitimate_symptom_still_produces_a_real_recommendation():
     """Positive control: a clear, on-catalog symptom should NOT be
     swallowed by the adversarial-safety net."""
     rec = recommend.generate_recommendation(
-        _request("wheat", "stems are hollow near the base and seedlings are dying", "Muktsar")
+        _request("wheat", "pink stem borer caterpillar feeding on stems, seedlings dying", "Muktsar")
     )
     assert rec.no_confident_match is False
     assert rec.recommended_product in REAL_PRODUCT_NAMES

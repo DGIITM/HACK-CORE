@@ -9,10 +9,15 @@ class Settings(BaseSettings):
     APP_NAME: str = "KrishiSathi"
     ENV: str = "local"
 
-    # STUB: real credentials wired up when M1/M4/M5 stop being stubs.
-    # LLM_PROVIDER switches app/services/llm_service.py once that file exists
-    # (Gemini via Vertex AI per CLAUDE.md — no other provider is in scope).
+    # LLM_PROVIDER switches app/services/llm_service.py's provider branch —
+    # only "gemini" is implemented, no other provider is in scope per
+    # CLAUDE.md. Within that, llm_service.py itself tiers between two
+    # Gemini auth paths: GEMINI_API_KEY (Gemini Developer API — primary,
+    # works from any dev machine with a free Google AI Studio key) and
+    # GOOGLE_CLOUD_PROJECT (Vertex AI service-account auth — fallback,
+    # the stated production path once real GCP access comes through).
     LLM_PROVIDER: str = "gemini"
+    GEMINI_API_KEY: str = ""
     GOOGLE_APPLICATION_CREDENTIALS: str = ""
     GOOGLE_CLOUD_PROJECT: str = ""
     VERTEX_AI_LOCATION: str = "us-central1"

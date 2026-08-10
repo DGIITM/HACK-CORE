@@ -171,7 +171,7 @@ def test_recommendation_confidence_increases_with_real_positive_outcomes(isolate
         farmer_request=FarmerRequest(
             crop="wheat",
             location=LocationSchema(district="Muktsar", state="Punjab"),
-            symptom_description="stems hollow near base, seedlings dying",
+            symptom_description="pink stem borer caterpillar feeding on stems, seedlings dying",
             language="en",
             photo_present=False,
         )
@@ -199,16 +199,19 @@ def test_recommendation_confidence_boost_never_flips_no_confident_match(isolated
     never used to manufacture one.
 
     Note: earlier versions of this test used off-topic/gibberish symptom
-    text instead of an off-catalog crop — those turned out NOT to be
-    zero-candidate cases for a district with logged pest history, because
-    M4's no-risk-context fallback appends *all* of a district's
-    historical pest names (unwindowed) to the retrieval query regardless
-    of what the symptom text says, and a pest name alone can match a
-    product's target_problem text. That's a pre-existing M4 retrieval
-    quirk unrelated to M9 (M4's own adversarial suite doesn't assert
-    confidence_score == 0 for every no-match case either) — an off-catalog
-    crop sidesteps it entirely, since retrieval's crop gate short-circuits
-    before the query text (pest names included) is ever examined.
+    text instead of an off-catalog crop — those weren't reliably zero-
+    candidate cases at the time, because retrieval.py used to fold
+    active_pests directly into the query text, so a district's pest
+    names alone could produce a confident-looking match regardless of
+    what the symptom actually said (identical to the soil_type bug
+    retrieval.py's own docstring already documented). That's since been
+    fixed — active_pests is now a ranking bonus applied only after the
+    symptom text clears the relevance gate on its own, same treatment as
+    soil_type — but this test still uses an off-catalog crop rather than
+    gibberish, since that's the more fundamental zero-candidate guarantee
+    (retrieval's crop gate short-circuits before any query text is
+    examined at all) and doesn't depend on the current state of the
+    similarity gate's tuning.
     """
     from app.schemas.entry_point import FarmerRequest, LocationSchema
     from app.schemas.recommend import RecommendationRequest
@@ -275,7 +278,7 @@ def test_generate_recommendation_surfaces_real_neighbour_proof_end_to_end(isolat
         farmer_request=FarmerRequest(
             crop="wheat",
             location=LocationSchema(district="Muktsar", state="Punjab"),
-            symptom_description="stems hollow near base, seedlings dying",
+            symptom_description="pink stem borer caterpillar feeding on stems, seedlings dying",
             language="en",
             photo_present=False,
         )

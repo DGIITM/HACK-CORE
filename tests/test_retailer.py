@@ -172,7 +172,7 @@ def test_generate_recommendation_logs_to_recommendation_history(isolated_logs):
         farmer_request=FarmerRequest(
             crop="wheat",
             location=LocationSchema(district="Muktsar", state="Punjab"),
-            symptom_description="stems hollow near base, seedlings dying",
+            symptom_description="pink stem borer caterpillar feeding on stems, seedlings dying",
             language="en",
             photo_present=False,
         )

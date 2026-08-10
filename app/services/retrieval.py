@@ -16,12 +16,22 @@ sees it, so a crop/symptom that genuinely has nothing relevant in the
 catalog comes back as an empty candidate list rather than "the least bad
 of 16 unrelated products."
 
-Soil type is deliberately NOT part of the similarity gate. An earlier
-version mixed it into the query text and that let soil words alone
-(e.g. "loam") produce false-positive matches for empty or nonsense
-symptom text, since roughly half the catalog's typical_soil_type field
-contains "loam". Soil type is now only a small ranking bonus applied
-after a candidate has already cleared the symptom-based relevance bar.
+Neither soil_type nor active_pests is part of the primary similarity
+gate/query — both are ranking bonuses applied only after a candidate has
+already cleared the symptom-based relevance bar. Soil was designed this
+way from the start (mixing it into the query text let soil words alone,
+e.g. "loam", produce false-positive matches for empty/nonsense symptom
+text — see git history). active_pests had the identical bug until this
+pass: it used to be concatenated straight into the query text, which let
+a district's pest names alone produce a confident-looking match for
+*any* symptom text, including pure gibberish, since a district's active
+pests don't change per request while the symptom does. Verified directly
+before fixing: gibberish and genuinely unrelated symptom text produced
+*identical* candidates/scores when a district had active pests, proving
+the symptom text wasn't contributing anything. This affected the
+candidate pool for the real Gemini path exactly as much as the
+deterministic fallback — both are handed the same candidates list built
+by this module before either one runs.
 """
 from typing import Dict, List
 
@@ -35,6 +45,7 @@ from app.services import data_foundation
 COLLECTION_NAME = "efficacy_products"
 MIN_SIMILARITY = 0.12  # cosine similarity floor below which a match doesn't count as relevant
 SOIL_MATCH_BONUS = 0.05  # ranking nudge only, applied after the relevance gate
+PEST_MATCH_BONUS = 0.08  # ranking nudge only, applied after the relevance gate
 TOP_K = 5
 
 
@@ -75,7 +86,9 @@ class _EfficacyIndex:
         )
         self._built = True
 
-    def search(self, crop: str, query_text: str, soil_type: str, top_k: int) -> List[Dict]:
+    def search(
+        self, crop: str, query_text: str, soil_type: str, active_pests: List[str], top_k: int
+    ) -> List[Dict]:
         if not self._built:
             self._build()
 
@@ -87,7 +100,9 @@ class _EfficacyIndex:
         if not query_vector.any():
             # No overlap at all with the catalog's vocabulary — nothing to
             # rank. This is the gate that catches empty/gibberish/off-topic
-            # symptom text.
+            # symptom text. query_text is symptom_description ONLY (see
+            # retrieve_candidates) so a district's active pests can no
+            # longer paper over a symptom with zero real relevance.
             return []
 
         # Crop mismatch already returned [] above, so every point in the
@@ -98,6 +113,8 @@ class _EfficacyIndex:
             limit=len(self._rows),
         ).points
 
+        pests_lower = [p.lower() for p in active_pests]
+
         candidates = []
         for hit in hits:
             if hit.score < MIN_SIMILARITY:
@@ -105,6 +122,8 @@ class _EfficacyIndex:
             score = hit.score
             if soil_type and soil_type.lower() in hit.payload["typical_soil_type"].lower():
                 score += SOIL_MATCH_BONUS
+            if any(pest in hit.payload["target_problem"].lower() for pest in pests_lower):
+                score += PEST_MATCH_BONUS
             candidates.append({**hit.payload, "_similarity": round(score, 4)})
 
         candidates.sort(key=lambda c: c["_similarity"], reverse=True)
@@ -121,10 +140,12 @@ def retrieve_candidates(
     soil_type: str,
     top_k: int = TOP_K,
 ) -> List[Dict]:
-    """Top 3-5 efficacy-dataset rows most relevant to this farmer's crop,
-    symptom, and active regional pests (soil type only breaks ties among
-    those). Returns [] — not the "closest available" junk — when nothing
-    clears MIN_SIMILARITY.
+    """Top 3-5 efficacy-dataset rows most relevant to this farmer's crop
+    and symptom. active_pests and soil_type only break ties among
+    candidates that already matched on the symptom text itself — neither
+    can single-handedly manufacture a match. Returns [] — not the
+    "closest available" junk — when nothing clears MIN_SIMILARITY.
     """
-    query_text = " ".join([symptom_description, " ".join(active_pests)])
-    return _index.search(crop=crop, query_text=query_text, soil_type=soil_type, top_k=top_k)
+    return _index.search(
+        crop=crop, query_text=symptom_description, soil_type=soil_type, active_pests=active_pests, top_k=top_k
+    )
