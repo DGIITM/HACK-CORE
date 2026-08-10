@@ -207,6 +207,76 @@
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
   .photo-preview { max-height: 4rem; border-radius: 0.5rem; }
 
+  /* ---- Stage tracker ---------------------------------------------------
+     Six real pipeline stages (M1/M3/M4/M5/M7/M8), each showing its own
+     labeled card as the real API response for that step comes back.
+     Deliberately no stamp-red here — that color stays reserved for the
+     seals inside each card's verification moment, not the tracker
+     chrome itself. */
+  .interaction-block { margin-bottom: 2rem; }
+  .question-bubble {
+    background: var(--wheat-gold);
+    color: var(--soil-brown);
+    border-radius: 1rem;
+    padding: 0.6rem 1rem;
+    margin-bottom: 1rem;
+    max-width: 78%;
+    margin-left: auto;
+  }
+  .tracker-error {
+    background: rgba(166, 61, 47, 0.08);
+    border: 1px solid var(--stamp-red);
+    color: var(--stamp-red);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+  .stage-row { display: flex; }
+  .stage-rail { width: 2.25rem; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+  .stage-marker {
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    background: #fff;
+    border: 2px solid rgba(61, 43, 31, 0.25);
+    color: var(--soil-brown);
+    flex-shrink: 0;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  .stage-line { width: 2px; flex-grow: 1; min-height: 0.75rem; background: rgba(61, 43, 31, 0.15); }
+  .stage-row:last-child .stage-line { display: none; }
+  .stage-content { flex-grow: 1; padding: 0 0 1.5rem 0.9rem; min-width: 0; }
+  .stage-row:last-child .stage-content { padding-bottom: 0; }
+  .stage-label {
+    font-family: "Roboto Slab", serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1.9rem;
+  }
+  .stage-pending .stage-marker { opacity: 0.45; }
+  .stage-pending .stage-label { opacity: 0.45; }
+  .stage-active .stage-marker { border-color: var(--wheat-gold); background: var(--wheat-gold); color: var(--soil-brown); }
+  .stage-active .stage-line { background: var(--wheat-gold); }
+  .stage-done .stage-marker { border-color: var(--sage); background: var(--sage); color: #fff; }
+  .stage-done .stage-line { background: var(--sage); }
+  .stage-card {
+    background: #fff;
+    border: 1px solid rgba(61, 43, 31, 0.14);
+    border-radius: 0.75rem;
+    padding: 0.8rem 1rem;
+    margin-top: 0.35rem;
+  }
+  .field-label { color: var(--sage); font-weight: 600; font-size: 0.8rem; }
+  .sync-badge { font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 999px; font-size: 0.8rem; display: inline-block; }
+  .sync-badge.synced { background: rgba(122, 139, 111, 0.25); color: var(--sage); }
+  .sync-badge.pending { background: rgba(201, 154, 59, 0.25); color: var(--wheat-gold-dark); }
+
   /* ---- Retailer console ---------------------------------------------- */
   .retailer-table thead { background: var(--soil-brown); color: var(--aged-paper); }
   .retailer-table tbody { background: #fff; }
@@ -289,58 +359,202 @@
               </div>
 
               <div class="card-body chat-window d-flex flex-column" ref="chatWindow">
-                <div v-if="messages.length === 0" class="text-muted text-center my-auto">
+                <div v-if="interactions.length === 0" class="text-muted text-center my-auto">
                   Describe a problem with your crop to get started — e.g.
-                  "leaves turning yellow at the tips".
+                  "leaves turning yellow at the tips". Watch it move through
+                  all six real steps below: Ask, Risk Check, Recommend,
+                  Explain, Log Outcome, Prove Impact.
                 </div>
-                <div
-                  v-for="(m, i) in messages"
-                  :key="i"
-                  class="bubble"
-                  :class="m.from === 'farmer' ? 'bubble-farmer' : 'bubble-bot'"
-                >
-                  <div v-if="m.from === 'farmer'">{{ m.text }}</div>
-                  <div v-else>
-                    <div v-if="m.riskContext && !m.riskContext.should_proceed" class="early-warning mb-2">
-                      ⚠️ {{ m.riskContext.early_warning }}
-                    </div>
 
-                    <!-- Recommendation card: item 3 — a real card, reusing /recommend data as-is -->
-                    <div v-if="!m.recommendation.no_confident_match" class="rec-card d-flex gap-3">
-                      <verification-seal :value="Math.round(m.recommendation.confidence_score * 100) + '%'" label="confidence"></verification-seal>
-                      <div class="flex-grow-1">
-                        <div class="product-name">{{ m.recommendation.recommended_product }}</div>
-                        <div class="small mt-1">{{ m.delivery.chat_message }}</div>
-                        <div class="mt-2" v-if="m.delivery.trust_features_shown.includes('mode_of_action')">
-                          <div class="note-label">Why it works</div>
-                          <div class="small">{{ m.recommendation.mode_of_action }}</div>
+                <div v-for="interaction in interactions" :key="interaction.id" class="interaction-block">
+                  <div class="question-bubble">{{ interaction.question }}</div>
+                  <div v-if="interaction.error" class="tracker-error">⚠️ {{ interaction.error }}</div>
+
+                  <!-- 1. Ask (M1 Entry Point) -->
+                  <div class="stage-row" :class="'stage-' + interaction.stages.ask.status">
+                    <div class="stage-rail">
+                      <div class="stage-marker">
+                        <span v-if="interaction.stages.ask.status === 'done'">✓</span>
+                        <span v-else-if="interaction.stages.ask.status === 'active'" class="spinner-border spinner-border-sm"></span>
+                        <span v-else>1</span>
+                      </div>
+                      <div class="stage-line"></div>
+                    </div>
+                    <div class="stage-content">
+                      <div class="stage-label">Ask</div>
+                      <div v-if="interaction.stages.ask.status === 'done'" class="stage-card">
+                        <div><span class="field-label">Crop:</span> {{ interaction.stages.ask.data.crop }}</div>
+                        <div><span class="field-label">Location:</span> {{ interaction.stages.ask.data.location.district }}, {{ interaction.stages.ask.data.location.state }}</div>
+                        <div><span class="field-label">Symptom:</span> {{ interaction.stages.ask.data.symptom_description }}</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 2. Risk Check (M3 Risk Intelligence) -->
+                  <div class="stage-row" :class="'stage-' + interaction.stages.risk.status">
+                    <div class="stage-rail">
+                      <div class="stage-marker">
+                        <span v-if="interaction.stages.risk.status === 'done'">✓</span>
+                        <span v-else-if="interaction.stages.risk.status === 'active'" class="spinner-border spinner-border-sm"></span>
+                        <span v-else>2</span>
+                      </div>
+                      <div class="stage-line"></div>
+                    </div>
+                    <div class="stage-content">
+                      <div class="stage-label">Risk Check</div>
+                      <div v-if="interaction.stages.risk.status === 'done'" class="stage-card">
+                        <template v-if="interaction.stages.risk.data">
+                          <div><span class="field-label">Readiness score:</span> {{ interaction.stages.risk.data.readiness_score }} — {{ interaction.stages.risk.data.should_proceed ? 'OK to proceed' : 'better to wait' }}</div>
+                          <div><span class="field-label">Weather:</span> {{ interaction.stages.risk.data.weather_summary }}</div>
+                          <div v-if="interaction.stages.risk.data.active_pests.length"><span class="field-label">Active pests:</span> {{ interaction.stages.risk.data.active_pests.join(', ') }}</div>
+                          <div v-if="interaction.stages.risk.data.early_warning" class="early-warning mt-2">⚠️ {{ interaction.stages.risk.data.early_warning }}</div>
+                        </template>
+                        <div v-else class="text-muted small">Risk check unavailable for this request.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 3. Recommend (M4 Recommendation Engine) -->
+                  <div class="stage-row" :class="'stage-' + interaction.stages.recommend.status">
+                    <div class="stage-rail">
+                      <div class="stage-marker">
+                        <span v-if="interaction.stages.recommend.status === 'done'">✓</span>
+                        <span v-else-if="interaction.stages.recommend.status === 'active'" class="spinner-border spinner-border-sm"></span>
+                        <span v-else>3</span>
+                      </div>
+                      <div class="stage-line"></div>
+                    </div>
+                    <div class="stage-content">
+                      <div class="stage-label">Recommend</div>
+                      <div v-if="interaction.stages.recommend.status === 'done'" class="stage-card">
+                        <template v-if="!interaction.stages.recommend.data.no_confident_match">
+                          <div class="d-flex gap-3">
+                            <verification-seal :value="Math.round(interaction.stages.recommend.data.confidence_score * 100) + '%'" label="confidence"></verification-seal>
+                            <div class="flex-grow-1">
+                              <div class="product-name">{{ interaction.stages.recommend.data.recommended_product }}</div>
+                              <div class="note-label mt-2">Mode of action</div>
+                              <div class="small">{{ interaction.stages.recommend.data.mode_of_action }}</div>
+                              <div class="neighbour-stat mt-2" v-if="interaction.stages.recommend.data.neighbour_proof.available">
+                                👥 {{ interaction.stages.recommend.data.neighbour_proof.farmers_nearby }} farmers nearby saw
+                                {{ interaction.stages.recommend.data.neighbour_proof.avg_outcome }}
+                              </div>
+                            </div>
+                          </div>
+                        </template>
+                        <div v-else class="fw-semibold" style="color: var(--soil-brown)">
+                          {{ interaction.stages.recommend.data.plain_language_reason }}
                         </div>
-                        <div class="neighbour-stat mt-2" v-if="m.delivery.trust_features_shown.includes('neighbour_proof')">
-                          👥 {{ m.recommendation.neighbour_proof.farmers_nearby }} farmers nearby saw
-                          {{ m.recommendation.neighbour_proof.avg_outcome }}
-                        </div>
-                        <div class="small text-muted fst-italic mt-2" v-if="m.delivery.trust_features_shown.includes('expectation_setting')">
-                          ⏳ {{ m.delivery.expectation_setting }}
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 4. Explain (M5 Response Delivery) -->
+                  <div class="stage-row" :class="'stage-' + interaction.stages.explain.status">
+                    <div class="stage-rail">
+                      <div class="stage-marker">
+                        <span v-if="interaction.stages.explain.status === 'done'">✓</span>
+                        <span v-else-if="interaction.stages.explain.status === 'active'" class="spinner-border spinner-border-sm"></span>
+                        <span v-else>4</span>
+                      </div>
+                      <div class="stage-line"></div>
+                    </div>
+                    <div class="stage-content">
+                      <div class="stage-label">Explain</div>
+                      <div v-if="interaction.stages.explain.status === 'done'" class="stage-card">
+                        <div class="small">{{ interaction.stages.explain.data.chat_message }}</div>
+                        <div class="small text-muted fst-italic mt-2" v-if="interaction.stages.explain.data.expectation_setting">
+                          ⏳ {{ interaction.stages.explain.data.expectation_setting }}
                         </div>
                         <audio
-                          v-if="m.delivery.audio_url"
-                          :src="m.delivery.audio_url"
+                          v-if="interaction.stages.explain.data.audio_url"
+                          :src="interaction.stages.explain.data.audio_url"
                           controls
                           class="mt-2 d-block"
                           style="height:2rem;width:100%"
                         ></audio>
-                        <div class="small text-muted fst-italic mt-1" v-if="m.delivery.translated_language !== language">
+                        <div class="small text-muted fst-italic mt-1" v-if="interaction.stages.explain.data.translated_language !== language">
                           (shown in English — translation to "{{ language }}" wasn't available in this environment)
                         </div>
                       </div>
                     </div>
+                  </div>
 
-                    <!-- Honest no-match case: no seal, nothing to verify -->
-                    <div v-else class="fw-semibold" style="color: var(--soil-brown)">
-                      {{ m.delivery.chat_message }}
+                  <!-- 5. Log Outcome (M7 Application & Logging) -->
+                  <div class="stage-row" :class="'stage-' + interaction.stages.log.status">
+                    <div class="stage-rail">
+                      <div class="stage-marker">
+                        <span v-if="interaction.stages.log.status === 'done'">✓</span>
+                        <span v-else-if="interaction.stages.log.status === 'active'" class="spinner-border spinner-border-sm"></span>
+                        <span v-else>5</span>
+                      </div>
+                      <div class="stage-line"></div>
+                    </div>
+                    <div class="stage-content">
+                      <div class="stage-label">Log Outcome</div>
+                      <div v-if="interaction.stages.explain.status === 'done' && interaction.stages.log.status !== 'done'" class="stage-card">
+                        <form class="row g-2" @submit.prevent="submitLogOutcome(interaction)">
+                          <div class="col-6">
+                            <input class="form-control form-control-sm" v-model="interaction.stages.log.form.farmer_id" placeholder="Farmer ID" required />
+                          </div>
+                          <div class="col-6">
+                            <input class="form-control form-control-sm" v-model="interaction.stages.log.form.batch_number" placeholder="Batch number" required />
+                          </div>
+                          <div class="col-6">
+                            <input class="form-control form-control-sm" type="date" v-model="interaction.stages.log.form.application_date" required />
+                          </div>
+                          <div class="col-6">
+                            <input class="form-control form-control-sm" type="number" step="0.1" v-model.number="interaction.stages.log.form.yield_result" placeholder="Yield (quintals/acre)" required />
+                          </div>
+                          <div class="col-12">
+                            <input class="form-control form-control-sm" v-model="interaction.stages.log.form.observed_outcome" placeholder="What did you observe?" required />
+                          </div>
+                          <div class="col-12">
+                            <button class="btn btn-sm btn-wheat" type="submit" :disabled="interaction.stages.log.status === 'active'">
+                              {{ interaction.stages.log.status === 'active' ? 'Logging…' : 'Log outcome' }}
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                      <div v-else-if="interaction.stages.log.status === 'done'" class="stage-card">
+                        <span class="sync-badge" :class="interaction.stages.log.data.synced ? 'synced' : 'pending'">
+                          {{ interaction.stages.log.data.synced ? '✓ Synced' : '⏳ Pending sync (offline queue)' }}
+                        </span>
+                        <div class="small mt-2">
+                          <span class="field-label">Batch verified:</span>
+                          {{ interaction.stages.log.data.batch_verified ? 'Yes' : 'No — unverified batch' }}
+                        </div>
+                        <div class="small"><span class="field-label">Observed:</span> {{ interaction.stages.log.data.observed_outcome }}</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 6. Prove Impact (M8 Impact Measurement) -->
+                  <div class="stage-row" :class="'stage-' + interaction.stages.impact.status">
+                    <div class="stage-rail">
+                      <div class="stage-marker">
+                        <span v-if="interaction.stages.impact.status === 'done'">✓</span>
+                        <span v-else-if="interaction.stages.impact.status === 'active'" class="spinner-border spinner-border-sm"></span>
+                        <span v-else>6</span>
+                      </div>
+                      <!-- last stage: no connecting line below -->
+                    </div>
+                    <div class="stage-content">
+                      <div class="stage-label">Prove Impact</div>
+                      <div v-if="interaction.stages.impact.status === 'done'" class="stage-card">
+                        <div class="d-flex flex-wrap gap-3">
+                          <verification-seal :value="interaction.stages.impact.data.estimated_effect_pct + '%'" label="est. effect"></verification-seal>
+                          <verification-seal :value="interaction.stages.impact.data.confidence_range[0] + '–' + interaction.stages.impact.data.confidence_range[1] + '%'" label="range" size="sm"></verification-seal>
+                          <verification-seal :value="'₹' + interaction.stages.impact.data.roi_per_acre_inr" label="ROI / acre"></verification-seal>
+                          <verification-seal :value="interaction.stages.impact.data.nitrogen_saved_kg + 'kg'" label="N saved" size="sm"></verification-seal>
+                        </div>
+                        <div class="small text-muted mt-2" v-if="interaction.stages.impact.data.data_basis === 'simulated'">
+                          Based on simulated season data, labeled per CLAUDE.md — not a claim about this specific farmer's real outcome yet.
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
+
                 <div v-if="loading" class="text-muted small">KrishiSathi is thinking…</div>
               </div>
 
@@ -488,7 +702,12 @@ const app = createApp({
       userInput: "",
       language: "pa",
       district: "Ludhiana",
-      messages: [],
+      interactions: [],
+      // A stable per-session farmer id so the Log Outcome form has a
+      // real, consistent identifier pre-filled without extra typing —
+      // still genuinely real data flowing through /log-outcome and
+      // /measure-impact, just generated client-side instead of typed.
+      sessionFarmerId: "farmer-" + Math.random().toString(36).slice(2, 8),
       loading: false,
       recording: false,
       micError: "",
@@ -619,6 +838,24 @@ const app = createApp({
       this.photoPreviewUrl = null;
     },
 
+    freshLogForm() {
+      return {
+        farmer_id: this.sessionFarmerId,
+        product_used: "",
+        batch_number: "",
+        application_date: new Date().toISOString().slice(0, 10),
+        yield_result: null,
+        observed_outcome: "",
+      };
+    },
+
+    scrollToBottom() {
+      this.$nextTick(() => {
+        const el = this.$refs.chatWindow;
+        if (el) el.scrollTop = el.scrollHeight;
+      });
+    },
+
     async sendMessage() {
       const text = this.userInput.trim();
       const hasAudio = !!this.pendingAudioBase64;
@@ -629,7 +866,21 @@ const app = createApp({
       if (text) bubbleParts.push(text);
       if (hasAudio) bubbleParts.push("🎤 voice message");
       if (hasPhoto) bubbleParts.push("📷 photo attached");
-      this.messages.push({ from: "farmer", text: bubbleParts.join(" — ") });
+
+      const interaction = {
+        id: Date.now() + "-" + Math.random().toString(36).slice(2, 6),
+        question: bubbleParts.join(" — "),
+        error: "",
+        stages: {
+          ask: { status: "active", data: null },
+          risk: { status: "pending", data: null },
+          recommend: { status: "pending", data: null },
+          explain: { status: "pending", data: null },
+          log: { status: "pending", data: null, form: this.freshLogForm() },
+          impact: { status: "pending", data: null },
+        },
+      };
+      this.interactions.push(interaction);
 
       const requestBody = {
         raw_text: text || null,
@@ -649,6 +900,7 @@ const app = createApp({
       this.userInput = "";
       this.clearAttachments();
       this.loading = true;
+      this.scrollToBottom();
 
       try {
         const entryRes = await fetch("/entry-point", {
@@ -661,6 +913,10 @@ const app = createApp({
           throw new Error(errBody.detail || `entry-point failed (${entryRes.status})`);
         }
         const farmerRequest = await entryRes.json();
+        interaction.stages.ask.data = farmerRequest;
+        interaction.stages.ask.status = "done";
+        interaction.stages.risk.status = "active";
+        this.scrollToBottom();
 
         const riskRes = await fetch("/risk-context", {
           method: "POST",
@@ -668,6 +924,10 @@ const app = createApp({
           body: JSON.stringify(farmerRequest),
         });
         const riskContext = riskRes.ok ? await riskRes.json() : null;
+        interaction.stages.risk.data = riskContext;
+        interaction.stages.risk.status = "done";
+        interaction.stages.recommend.status = "active";
+        this.scrollToBottom();
 
         const recRes = await fetch("/recommend", {
           method: "POST",
@@ -675,6 +935,10 @@ const app = createApp({
           body: JSON.stringify({ farmer_request: farmerRequest, risk_context: riskContext }),
         });
         const recommendation = await recRes.json();
+        interaction.stages.recommend.data = recommendation;
+        interaction.stages.recommend.status = "done";
+        interaction.stages.explain.status = "active";
+        this.scrollToBottom();
 
         const deliverRes = await fetch("/deliver", {
           method: "POST",
@@ -686,32 +950,83 @@ const app = createApp({
           }),
         });
         const delivery = await deliverRes.json();
-
-        this.messages.push({ from: "bot", recommendation, delivery, riskContext });
+        interaction.stages.explain.data = delivery;
+        interaction.stages.explain.status = "done";
+        interaction.stages.log.form.product_used = recommendation.recommended_product || "";
+        this.scrollToBottom();
       } catch (err) {
-        this.messages.push({
-          from: "bot",
-          recommendation: {
-            no_confident_match: true,
-            recommended_product: "",
-            confidence_score: 0,
-            mode_of_action: "",
-            neighbour_proof: { available: false, farmers_nearby: 0, avg_outcome: "" },
-          },
-          delivery: {
-            chat_message: "Something went wrong talking to the server: " + err.message,
-            translated_language: this.language,
-            audio_url: null,
-            expectation_setting: "",
-            trust_features_shown: [],
-          },
-        });
+        interaction.error = "Something went wrong talking to the server: " + err.message;
+        for (const key of ["ask", "risk", "recommend", "explain"]) {
+          if (interaction.stages[key].status === "active") interaction.stages[key].status = "pending";
+        }
       } finally {
         this.loading = false;
-        this.$nextTick(() => {
-          const el = this.$refs.chatWindow;
-          if (el) el.scrollTop = el.scrollHeight;
+        this.scrollToBottom();
+      }
+    },
+
+    async submitLogOutcome(interaction) {
+      interaction.stages.log.status = "active";
+      this.scrollToBottom();
+      try {
+        const district = interaction.stages.ask.data && interaction.stages.ask.data.location
+          ? interaction.stages.ask.data.location.district
+          : this.district;
+        const form = interaction.stages.log.form;
+        const res = await fetch("/log-outcome", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            farmer_id: form.farmer_id,
+            product_used: form.product_used || (interaction.stages.recommend.data && interaction.stages.recommend.data.recommended_product) || "",
+            batch_number: form.batch_number,
+            application_date: form.application_date,
+            observed_outcome: form.observed_outcome,
+            yield_result: form.yield_result,
+            district: district,
+          }),
         });
+        if (!res.ok) {
+          const errBody = await res.json().catch(() => ({}));
+          throw new Error(errBody.detail || `log-outcome failed (${res.status})`);
+        }
+        const outcome = await res.json();
+        interaction.stages.log.data = outcome;
+        interaction.stages.log.status = "done";
+        this.scrollToBottom();
+        await this.measureImpact(interaction, district);
+      } catch (err) {
+        interaction.error = "Something went wrong logging the outcome: " + err.message;
+        interaction.stages.log.status = "pending";
+      }
+    },
+
+    async measureImpact(interaction, district) {
+      interaction.stages.impact.status = "active";
+      this.scrollToBottom();
+      try {
+        const form = interaction.stages.log.form;
+        const res = await fetch("/measure-impact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            farmer_id: form.farmer_id,
+            product_used: form.product_used || (interaction.stages.recommend.data && interaction.stages.recommend.data.recommended_product) || "",
+            district: district,
+          }),
+        });
+        if (!res.ok) {
+          const errBody = await res.json().catch(() => ({}));
+          throw new Error(errBody.detail || `measure-impact failed (${res.status})`);
+        }
+        const impact = await res.json();
+        interaction.stages.impact.data = impact;
+        interaction.stages.impact.status = "done";
+      } catch (err) {
+        interaction.error = "Something went wrong measuring impact: " + err.message;
+        interaction.stages.impact.status = "pending";
+      } finally {
+        this.scrollToBottom();
       }
     },
   },
