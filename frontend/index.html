@@ -8,254 +8,472 @@
   href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
   rel="stylesheet"
 />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Gurmukhi:wght@400;600;700&family=Roboto+Slab:wght@600;700&display=swap"
+  rel="stylesheet"
+/>
 <style>
-  body { background: #f4f7f2; }
-  .hero { background: #1b4332; color: #fff; }
-  .chat-window { height: 55vh; overflow-y: auto; background: #fff; }
-  .bubble { max-width: 75%; border-radius: 1rem; padding: 0.6rem 1rem; margin-bottom: 0.5rem; }
-  .bubble-farmer { background: #d8f3dc; margin-left: auto; }
-  .bubble-bot { background: #e9ecef; margin-right: auto; }
-  .badge-confidence { font-size: 0.75rem; }
-  .mic-btn.recording { background: #dc3545; border-color: #dc3545; color: #fff; animation: pulse 1.2s infinite; }
+  /* ---- Design tokens -------------------------------------------------- */
+  :root {
+    --wheat-gold: #C99A3B;
+    --wheat-gold-dark: #a97f2e;
+    --soil-brown: #3D2B1F;
+    --sage: #7A8B6F;
+    --stamp-red: #A63D2F;
+    --aged-paper: #F2E9D8;
+  }
+
+  /* Noto Sans first for Latin, then the Devanagari/Gurmukhi variants so
+     Hindi/Punjabi glyphs render correctly instead of falling back to a
+     generic system font that may not cover those scripts. */
+  * {
+    font-family: "Noto Sans", "Noto Sans Devanagari", "Noto Sans Gurmukhi", sans-serif;
+  }
+  .wordmark, .headline, h1, h2, h3, .product-name {
+    font-family: "Roboto Slab", "Noto Sans Devanagari", "Noto Sans Gurmukhi", serif;
+  }
+
+  body { background: var(--aged-paper); color: var(--soil-brown); }
+
+  /* ---- Top bar (chat / retailer views) --------------------------------- */
+  .topbar {
+    background: var(--soil-brown);
+    color: var(--aged-paper);
+  }
+  .topbar .wordmark {
+    color: var(--wheat-gold);
+    cursor: pointer;
+    font-size: 1.3rem;
+  }
+  .topbar .subtitle { color: var(--aged-paper); opacity: 0.75; font-size: 0.8rem; }
+
+  /* ---- Buttons ----------------------------------------------------------*/
+  .btn-wheat {
+    background: var(--wheat-gold);
+    border-color: var(--wheat-gold);
+    color: var(--soil-brown);
+    font-weight: 600;
+  }
+  .btn-wheat:hover, .btn-wheat:focus {
+    background: var(--wheat-gold-dark);
+    border-color: var(--wheat-gold-dark);
+    color: var(--soil-brown);
+  }
+  .btn-outline-soil {
+    border-color: var(--soil-brown);
+    color: var(--soil-brown);
+  }
+  .btn-outline-soil:hover { background: var(--soil-brown); color: var(--aged-paper); }
+
+  /* ---- Landing / role select --------------------------------------------*/
+  .landing {
+    min-height: 82vh;
+    padding: 3rem 1rem;
+    text-align: center;
+  }
+  .landing .wordmark { font-size: 3rem; color: var(--soil-brown); }
+  .landing .tagline {
+    max-width: 640px;
+    margin: 1rem auto 3rem;
+    color: var(--soil-brown);
+    opacity: 0.85;
+  }
+  .role-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.75rem;
+  }
+  .role-card {
+    width: 280px;
+    padding: 2.25rem 1.5rem;
+    border: 2px solid var(--wheat-gold);
+    border-radius: 1rem;
+    background: #fff;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    text-align: center;
+  }
+  .role-card:hover, .role-card:focus-visible {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(61, 43, 31, 0.18);
+    outline: none;
+  }
+  .role-card-icon { font-size: 2.75rem; margin-bottom: 0.5rem; }
+  .role-card-title {
+    font-family: "Roboto Slab", serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--soil-brown);
+  }
+  .role-card-sub { color: var(--sage); font-size: 0.9rem; margin-top: 0.4rem; }
+
+  /* ---- Verification seal ("ink stamp") ----------------------------------
+     The one recurring signature element — reserved strictly for
+     verification moments (confidence score, batch-verified, ROI figure).
+     Never used decoratively elsewhere in the app. */
+  .seal-wrap { display: inline-flex; flex-direction: column; align-items: center; }
+  .seal {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 2px solid var(--stamp-red);
+    color: var(--stamp-red);
+    font-weight: 700;
+    font-size: 0.72rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transform: rotate(-7deg);
+    background: rgba(166, 61, 47, 0.04);
+    flex-shrink: 0;
+  }
+  .seal::before {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border: 1px dashed var(--stamp-red);
+    border-radius: 50%;
+    opacity: 0.55;
+  }
+  .seal-sm { width: 2.1rem; height: 2.1rem; font-size: 0.55rem; }
+  .seal-sm::before { inset: 2px; }
+  .seal-label {
+    font-size: 0.62rem;
+    color: var(--sage);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 0.2rem;
+    text-align: center;
+  }
+
+  /* ---- Chat -------------------------------------------------------------*/
+  .chat-window {
+    height: 55vh;
+    overflow-y: auto;
+    background: var(--aged-paper);
+  }
+  .bubble {
+    max-width: 78%;
+    border-radius: 1rem;
+    padding: 0.6rem 1rem;
+    margin-bottom: 0.6rem;
+  }
+  .bubble-farmer {
+    background: var(--wheat-gold);
+    color: var(--soil-brown);
+    margin-left: auto;
+  }
+  .bubble-bot {
+    background: #fff;
+    border: 1px solid rgba(61, 43, 31, 0.12);
+    color: var(--soil-brown);
+    margin-right: auto;
+  }
+  .early-warning {
+    background: rgba(201, 154, 59, 0.18);
+    border: 1px solid var(--wheat-gold);
+    color: var(--soil-brown);
+    border-radius: 0.5rem;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  /* Recommendation card — item 3: a real card, not a text block. */
+  .rec-card {
+    background: #fff;
+    border: 1px solid rgba(61, 43, 31, 0.14);
+    border-radius: 0.75rem;
+    padding: 0.9rem 1rem;
+  }
+  .note-label {
+    color: var(--sage);
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .neighbour-stat { color: var(--sage); font-size: 0.85rem; }
+
+  .mic-btn.recording {
+    background: var(--soil-brown);
+    border-color: var(--soil-brown);
+    color: var(--aged-paper);
+    animation: pulse 1.2s infinite;
+  }
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
   .photo-preview { max-height: 4rem; border-radius: 0.5rem; }
+
+  /* ---- Retailer console ---------------------------------------------- */
+  .retailer-table thead { background: var(--soil-brown); color: var(--aged-paper); }
+  .retailer-table tbody { background: #fff; }
+  .demand-badge { font-weight: 600; border: none; }
+  .demand-high { background: var(--wheat-gold); color: var(--soil-brown); }
+  .demand-medium { background: rgba(122, 139, 111, 0.35); color: var(--soil-brown); }
+  .demand-low { background: transparent; color: var(--sage); border: 1px solid var(--sage) !important; }
 </style>
 </head>
 <body>
 <div id="app">
 
-  <div class="hero py-5 mb-4">
-    <div class="container">
-      <h1 class="fw-bold">🌾 KrishiSathi</h1>
-      <p class="lead mb-0">
-        Biological products work — but farmers can't verify that before buying,
-        companies can't prove it after selling, and the retailer in between has
-        no evidence to offer either. It's a trust gap, not a technology gap.
-      </p>
-    </div>
-  </div>
-
-  <div class="container pb-5">
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-
-        <ul class="nav nav-tabs mb-3">
-          <li class="nav-item">
-            <a class="nav-link" :class="{ active: activeTab === 'chat' }" href="#" @click.prevent="activeTab = 'chat'">
-              Chat
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              :class="{ active: activeTab === 'retailer' }"
-              href="#"
-              @click.prevent="activeTab = 'retailer'; loadRetailerView()"
-            >
-              Retailer View
-            </a>
-          </li>
-        </ul>
-
-        <div v-show="activeTab === 'chat'">
-        <div class="card shadow-sm">
-          <div class="card-header d-flex justify-content-between align-items-center">
-            <strong>Ask KrishiSathi about your crop</strong>
-            <div class="d-flex gap-2">
-              <select class="form-select form-select-sm" v-model="language" style="width:auto">
-                <option value="pa">ਪੰਜਾਬੀ</option>
-                <option value="hi">हिंदी</option>
-                <option value="en">English</option>
-              </select>
-              <input
-                class="form-control form-control-sm"
-                style="width:9rem"
-                v-model="district"
-                placeholder="District"
-              />
-            </div>
-          </div>
-
-          <div class="card-body chat-window d-flex flex-column" ref="chatWindow">
-            <div v-if="messages.length === 0" class="text-muted text-center my-auto">
-              Describe a problem with your crop to get started — e.g.
-              "leaves turning yellow at the tips".
-            </div>
-            <div
-              v-for="(m, i) in messages"
-              :key="i"
-              class="bubble"
-              :class="m.from === 'farmer' ? 'bubble-farmer' : 'bubble-bot'"
-            >
-              <div v-if="m.from === 'farmer'">{{ m.text }}</div>
-              <div v-else>
-                <div v-if="m.riskContext && !m.riskContext.should_proceed" class="alert alert-warning py-1 px-2 small mb-2">
-                  ⚠️ {{ m.riskContext.early_warning }}
-                </div>
-                <div
-                  class="mt-1"
-                  :class="m.recommendation.no_confident_match ? 'fw-semibold text-warning-emphasis' : ''"
-                >
-                  <span v-if="!m.recommendation.no_confident_match" class="fw-semibold">
-                    {{ m.recommendation.recommended_product }}
-                    <span class="badge bg-success badge-confidence ms-1">
-                      {{ Math.round(m.recommendation.confidence_score * 100) }}% confidence
-                    </span>
-                    <br />
-                  </span>
-                  {{ m.delivery.chat_message }}
-                </div>
-                <div class="small text-muted mt-1" v-if="m.delivery.trust_features_shown.includes('mode_of_action')">
-                  <strong>Why it works:</strong> {{ m.recommendation.mode_of_action }}
-                </div>
-                <div class="small text-muted" v-if="m.delivery.trust_features_shown.includes('neighbour_proof')">
-                  <strong>Nearby:</strong>
-                  {{ m.recommendation.neighbour_proof.farmers_nearby }} farmers nearby saw
-                  {{ m.recommendation.neighbour_proof.avg_outcome }}.
-                </div>
-                <div class="small text-muted fst-italic mt-1" v-if="m.delivery.trust_features_shown.includes('expectation_setting')">
-                  ⏳ {{ m.delivery.expectation_setting }}
-                </div>
-                <audio
-                  v-if="m.delivery.audio_url"
-                  :src="m.delivery.audio_url"
-                  controls
-                  class="mt-2 d-block"
-                  style="height:2rem;width:100%"
-                ></audio>
-                <div class="small text-muted fst-italic mt-1" v-if="m.delivery.translated_language !== language">
-                  (shown in English — translation to "{{ language }}" wasn't available in this environment)
-                </div>
-              </div>
-            </div>
-            <div v-if="loading" class="text-muted small">KrishiSathi is thinking…</div>
-          </div>
-
-          <div class="card-footer">
-            <div v-if="photoPreviewUrl || pendingAudioBase64" class="d-flex align-items-center gap-2 mb-2">
-              <img v-if="photoPreviewUrl" :src="photoPreviewUrl" class="photo-preview" alt="attached photo" />
-              <span v-if="pendingAudioBase64" class="badge bg-secondary">🎤 voice message recorded</span>
-              <button type="button" class="btn btn-sm btn-outline-secondary" @click="clearAttachments">
-                Remove
-              </button>
-            </div>
-            <div v-if="micError" class="text-danger small mb-2">{{ micError }}</div>
-            <form class="d-flex gap-2" @submit.prevent="sendMessage">
-              <input
-                class="form-control"
-                v-model="userInput"
-                placeholder="Describe what you're seeing in your field..."
-                :disabled="loading"
-              />
-              <input
-                ref="photoInput"
-                type="file"
-                accept="image/*"
-                class="d-none"
-                @change="onPhotoSelected"
-              />
-              <button
-                type="button"
-                class="btn btn-outline-secondary"
-                title="Attach a photo"
-                :disabled="loading"
-                @click="$refs.photoInput.click()"
-              >
-                📷
-              </button>
-              <button
-                type="button"
-                class="btn btn-outline-secondary mic-btn"
-                :class="{ recording: recording }"
-                :title="recording ? 'Stop recording' : 'Record a voice message'"
-                :disabled="loading"
-                @click="toggleRecording"
-              >
-                🎤
-              </button>
-              <button
-                class="btn btn-success"
-                type="submit"
-                :disabled="loading || (!userInput.trim() && !pendingAudioBase64 && !pendingPhotoBase64)"
-              >
-                Send
-              </button>
-            </form>
-          </div>
-        </div>
-        </div>
-
-        <div v-show="activeTab === 'retailer'" class="card shadow-sm">
-          <div class="card-header d-flex justify-content-between align-items-center">
-            <strong>Retailer console</strong>
-            <div class="d-flex gap-2">
-              <input
-                class="form-control form-control-sm"
-                style="width:9rem"
-                v-model="retailerDistrict"
-                placeholder="District"
-                @keyup.enter="loadRetailerView"
-              />
-              <button class="btn btn-sm btn-outline-secondary" :disabled="retailerLoading" @click="loadRetailerView">
-                Refresh
-              </button>
-            </div>
-          </div>
-          <div class="card-body">
-            <div v-if="retailerLoading" class="text-muted small">Loading…</div>
-            <template v-else-if="retailerData">
-              <div v-if="retailerData.recent_recommendations.length === 0" class="text-muted small">
-                No recommendations logged yet for {{ retailerData.district }}. Ask KrishiSathi about a
-                crop problem in this district from the Chat tab, then refresh.
-              </div>
-              <table v-else class="table table-sm align-middle">
-                <thead>
-                  <tr>
-                    <th>Product</th>
-                    <th>Recommended</th>
-                    <th>Avg. confidence</th>
-                    <th>Outcomes logged</th>
-                    <th>Demand</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="row in retailerData.recent_recommendations" :key="row.product_name">
-                    <td>
-                      {{ row.product_name }}
-                      <div class="small text-muted">{{ row.avg_outcome_summary }}</div>
-                    </td>
-                    <td>{{ row.count }}</td>
-                    <td>{{ Math.round(row.avg_confidence * 100) }}%</td>
-                    <td>{{ row.outcomes_logged }}</td>
-                    <td>
-                      <span
-                        class="badge"
-                        :class="{
-                          'bg-success': demandLevelFor(row.product_name) === 'high',
-                          'bg-warning text-dark': demandLevelFor(row.product_name) === 'medium',
-                          'bg-secondary': demandLevelFor(row.product_name) === 'low',
-                        }"
-                      >
-                        {{ demandLevelFor(row.product_name) }}
-                      </span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="small text-muted">Generated at {{ retailerData.generated_at }}</div>
-            </template>
-          </div>
-        </div>
-
-        <p class="text-muted small mt-3 mb-0">
-          Every module runs real logic against real Gemini/Qdrant/Open-Meteo/
-          Cloud Translation/TTS/statsmodels calls where GCP credentials are
-          configured, and falls back to honestly-labeled deterministic logic
-          where they aren't — never fabricated data either way.
-        </p>
+  <!-- ================= Landing / role select ================= -->
+  <div v-if="view === 'landing'" class="landing d-flex flex-column align-items-center justify-content-center">
+    <div class="wordmark fw-bold">🌾 KrishiSathi</div>
+    <p class="tagline lead mb-0">
+      Biological products work — but farmers can't verify that before buying,
+      companies can't prove it after selling, and the retailer in between has
+      no evidence to offer either. It's a trust gap, not a technology gap.
+    </p>
+    <div class="role-cards">
+      <div
+        class="role-card"
+        role="button"
+        tabindex="0"
+        @click="goToChat"
+        @keyup.enter="goToChat"
+      >
+        <div class="role-card-icon">🌱</div>
+        <div class="role-card-title">I'm a Farmer</div>
+        <div class="role-card-sub">Describe a crop problem and get a trusted recommendation</div>
+      </div>
+      <div
+        class="role-card"
+        role="button"
+        tabindex="0"
+        @click="goToRetailer"
+        @keyup.enter="goToRetailer"
+      >
+        <div class="role-card-icon">🏬</div>
+        <div class="role-card-title">I'm a Retailer</div>
+        <div class="role-card-sub">See what's being recommended and verified in your district</div>
       </div>
     </div>
   </div>
+
+  <!-- ================= Chat + Retailer (shared top bar) ================= -->
+  <template v-else>
+    <div class="topbar py-3 mb-4">
+      <div class="container d-flex align-items-center justify-content-between">
+        <div>
+          <div class="wordmark fw-bold" role="button" @click="view = 'landing'">🌾 KrishiSathi</div>
+          <div class="subtitle">{{ view === 'chat' ? "Farmer view" : "Retailer view" }} · click the wordmark to switch roles</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container pb-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+          <!-- ---------------- Chat view ---------------- -->
+          <div v-if="view === 'chat'">
+            <div class="card shadow-sm border-0">
+              <div class="card-header d-flex justify-content-between align-items-center bg-white">
+                <strong>Ask KrishiSathi about your crop</strong>
+                <div class="d-flex gap-2">
+                  <select class="form-select form-select-sm" v-model="language" style="width:auto">
+                    <option value="pa">ਪੰਜਾਬੀ</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="en">English</option>
+                  </select>
+                  <input
+                    class="form-control form-control-sm"
+                    style="width:9rem"
+                    v-model="district"
+                    placeholder="District"
+                  />
+                </div>
+              </div>
+
+              <div class="card-body chat-window d-flex flex-column" ref="chatWindow">
+                <div v-if="messages.length === 0" class="text-muted text-center my-auto">
+                  Describe a problem with your crop to get started — e.g.
+                  "leaves turning yellow at the tips".
+                </div>
+                <div
+                  v-for="(m, i) in messages"
+                  :key="i"
+                  class="bubble"
+                  :class="m.from === 'farmer' ? 'bubble-farmer' : 'bubble-bot'"
+                >
+                  <div v-if="m.from === 'farmer'">{{ m.text }}</div>
+                  <div v-else>
+                    <div v-if="m.riskContext && !m.riskContext.should_proceed" class="early-warning mb-2">
+                      ⚠️ {{ m.riskContext.early_warning }}
+                    </div>
+
+                    <!-- Recommendation card: item 3 — a real card, reusing /recommend data as-is -->
+                    <div v-if="!m.recommendation.no_confident_match" class="rec-card d-flex gap-3">
+                      <verification-seal :value="Math.round(m.recommendation.confidence_score * 100) + '%'" label="confidence"></verification-seal>
+                      <div class="flex-grow-1">
+                        <div class="product-name">{{ m.recommendation.recommended_product }}</div>
+                        <div class="small mt-1">{{ m.delivery.chat_message }}</div>
+                        <div class="mt-2" v-if="m.delivery.trust_features_shown.includes('mode_of_action')">
+                          <div class="note-label">Why it works</div>
+                          <div class="small">{{ m.recommendation.mode_of_action }}</div>
+                        </div>
+                        <div class="neighbour-stat mt-2" v-if="m.delivery.trust_features_shown.includes('neighbour_proof')">
+                          👥 {{ m.recommendation.neighbour_proof.farmers_nearby }} farmers nearby saw
+                          {{ m.recommendation.neighbour_proof.avg_outcome }}
+                        </div>
+                        <div class="small text-muted fst-italic mt-2" v-if="m.delivery.trust_features_shown.includes('expectation_setting')">
+                          ⏳ {{ m.delivery.expectation_setting }}
+                        </div>
+                        <audio
+                          v-if="m.delivery.audio_url"
+                          :src="m.delivery.audio_url"
+                          controls
+                          class="mt-2 d-block"
+                          style="height:2rem;width:100%"
+                        ></audio>
+                        <div class="small text-muted fst-italic mt-1" v-if="m.delivery.translated_language !== language">
+                          (shown in English — translation to "{{ language }}" wasn't available in this environment)
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Honest no-match case: no seal, nothing to verify -->
+                    <div v-else class="fw-semibold" style="color: var(--soil-brown)">
+                      {{ m.delivery.chat_message }}
+                    </div>
+                  </div>
+                </div>
+                <div v-if="loading" class="text-muted small">KrishiSathi is thinking…</div>
+              </div>
+
+              <div class="card-footer bg-white">
+                <div v-if="photoPreviewUrl || pendingAudioBase64" class="d-flex align-items-center gap-2 mb-2">
+                  <img v-if="photoPreviewUrl" :src="photoPreviewUrl" class="photo-preview" alt="attached photo" />
+                  <span v-if="pendingAudioBase64" class="badge" style="background: var(--sage)">🎤 voice message recorded</span>
+                  <button type="button" class="btn btn-sm btn-outline-soil" @click="clearAttachments">
+                    Remove
+                  </button>
+                </div>
+                <div v-if="micError" class="text-danger small mb-2">{{ micError }}</div>
+                <form class="d-flex gap-2" @submit.prevent="sendMessage">
+                  <input
+                    class="form-control"
+                    v-model="userInput"
+                    placeholder="Describe what you're seeing in your field..."
+                    :disabled="loading"
+                  />
+                  <input
+                    ref="photoInput"
+                    type="file"
+                    accept="image/*"
+                    class="d-none"
+                    @change="onPhotoSelected"
+                  />
+                  <button
+                    type="button"
+                    class="btn btn-outline-soil"
+                    title="Attach a photo"
+                    :disabled="loading"
+                    @click="$refs.photoInput.click()"
+                  >
+                    📷
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-soil mic-btn"
+                    :class="{ recording: recording }"
+                    :title="recording ? 'Stop recording' : 'Record a voice message'"
+                    :disabled="loading"
+                    @click="toggleRecording"
+                  >
+                    🎤
+                  </button>
+                  <button
+                    class="btn btn-wheat"
+                    type="submit"
+                    :disabled="loading || (!userInput.trim() && !pendingAudioBase64 && !pendingPhotoBase64)"
+                  >
+                    Send
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <p class="text-muted small mt-3 mb-0">
+              Every module runs real logic against real Gemini/Qdrant/Open-Meteo/
+              Cloud Translation/TTS/statsmodels calls where GCP credentials are
+              configured, and falls back to honestly-labeled deterministic logic
+              where they aren't — never fabricated data either way.
+            </p>
+          </div>
+
+          <!-- ---------------- Retailer view ---------------- -->
+          <div v-else-if="view === 'retailer'" class="card shadow-sm border-0">
+            <div class="card-header d-flex justify-content-between align-items-center bg-white">
+              <strong>Retailer console</strong>
+              <div class="d-flex gap-2">
+                <input
+                  class="form-control form-control-sm"
+                  style="width:9rem"
+                  v-model="retailerDistrict"
+                  placeholder="District"
+                  @keyup.enter="loadRetailerView"
+                />
+                <button class="btn btn-sm btn-outline-soil" :disabled="retailerLoading" @click="loadRetailerView">
+                  Refresh
+                </button>
+              </div>
+            </div>
+            <div class="card-body retailer-body">
+              <div v-if="retailerLoading" class="text-muted small">Loading…</div>
+              <template v-else-if="retailerData">
+                <div v-if="retailerData.recent_recommendations.length === 0" class="text-muted small">
+                  No recommendations logged yet for {{ retailerData.district }}. Ask KrishiSathi about a
+                  crop problem in this district from the Farmer view, then refresh.
+                </div>
+                <table v-else class="table table-sm align-middle retailer-table bg-white">
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Recommended</th>
+                      <th>Avg. confidence</th>
+                      <th>Outcomes logged</th>
+                      <th>Demand</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="row in retailerData.recent_recommendations" :key="row.product_name">
+                      <td>
+                        {{ row.product_name }}
+                        <div class="small text-muted">{{ row.avg_outcome_summary }}</div>
+                      </td>
+                      <td>{{ row.count }}</td>
+                      <td>
+                        <verification-seal :value="Math.round(row.avg_confidence * 100) + '%'" size="sm"></verification-seal>
+                      </td>
+                      <td>{{ row.outcomes_logged }}</td>
+                      <td>
+                        <span
+                          class="badge demand-badge"
+                          :class="{
+                            'demand-high': demandLevelFor(row.product_name) === 'high',
+                            'demand-medium': demandLevelFor(row.product_name) === 'medium',
+                            'demand-low': demandLevelFor(row.product_name) === 'low',
+                          }"
+                        >
+                          {{ demandLevelFor(row.product_name) }}
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="small text-muted">Generated at {{ retailerData.generated_at }}</div>
+              </template>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </template>
 
 </div>
 
@@ -263,9 +481,10 @@
 <script>
 const { createApp } = Vue;
 
-createApp({
+const app = createApp({
   data() {
     return {
+      view: "landing", // 'landing' | 'chat' | 'retailer'
       userInput: "",
       language: "pa",
       district: "Ludhiana",
@@ -280,13 +499,21 @@ createApp({
       pendingPhotoBase64: null,
       pendingPhotoMimeType: null,
       photoPreviewUrl: null,
-      activeTab: "chat",
       retailerDistrict: "Ludhiana",
       retailerData: null,
       retailerLoading: false,
     };
   },
   methods: {
+    goToChat() {
+      this.view = "chat";
+    },
+
+    goToRetailer() {
+      this.view = "retailer";
+      this.loadRetailerView();
+    },
+
     async loadRetailerView() {
       this.retailerLoading = true;
       try {
@@ -488,7 +715,30 @@ createApp({
       }
     },
   },
-}).mount("#app");
+});
+
+// Verification seal — the one recurring signature element (item 2),
+// styled like a real ink stamp. Reused wherever something is being
+// verified: the confidence score here (chat card + retailer table);
+// a batch-verified indicator and the M8 ROI figure are documented as
+// the same component's future callers once those flows get a UI
+// surface — out of scope for this pass (frontend-only, no new backend
+// wiring), so not built here.
+app.component("verification-seal", {
+  props: {
+    value: { type: String, required: true },
+    label: { type: String, default: "" },
+    size: { type: String, default: "" },
+  },
+  template: `
+    <div class="seal-wrap">
+      <div class="seal" :class="size === 'sm' ? 'seal-sm' : ''">{{ value }}</div>
+      <div v-if="label" class="seal-label">{{ label }}</div>
+    </div>
+  `,
+});
+
+app.mount("#app");
 </script>
 </body>
 </html>
