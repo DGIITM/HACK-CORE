@@ -1,0 +1,5 @@
+# Force consistent line endings regardless of any collaborator's local
+# git config — run.sh needs a real LF shebang on Unix, run.bat needs CRLF
+# on Windows.
+*.sh text eol=lf
+*.bat text eol=crlf
