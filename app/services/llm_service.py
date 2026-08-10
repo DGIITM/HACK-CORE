@@ -11,8 +11,14 @@ Two Gemini auth tiers, both via the unified `google-genai` SDK:
      Fallback tier — CLAUDE.md's stated production path once real GCP
      access comes through, kept working but no longer the thing that
      runs on every call.
-If neither is configured, LLMNotConfiguredError propagates and callers
-fall back to their own deterministic logic — same as before.
+If neither is configured, or the call itself fails once attempted
+(rate limit, network error, server error — anything), LLMUnavailableError
+propagates and callers fall back to their own deterministic logic.
+Observed live, not theoretical: the free tier's 20-requests/day cap was
+hit during testing, and the resulting 429 propagated as a raw,
+unhandled exception all the way to a 500 response — every caller only
+caught "not configured," not "configured but the call failed." Fixed by
+having _call_gemini() itself catch anything the actual API call raises.
 
 Model: gemini-3.5-flash, not gemini-2.0-flash-001. CLAUDE.md's original
 locked choice (gemini-2.0-flash-001) is confirmed fully retired as of
@@ -35,11 +41,24 @@ logger = logging.getLogger(__name__)
 MODEL_NAME = "gemini-3.5-flash"
 
 
-class LLMNotConfiguredError(RuntimeError):
-    """Raised when the configured provider has no usable credentials.
-    Callers must catch this and fall back to deterministic logic — a
-    missing API key should never surface as a raw 500, and it must never
-    be treated as license to invent an answer."""
+class LLMUnavailableError(RuntimeError):
+    """Base class: Gemini isn't usable right now, for any reason.
+    Callers should catch this (not the subclasses individually) and fall
+    back to deterministic logic — this must never surface as a raw 500,
+    and must never be treated as license to invent an answer."""
+
+
+class LLMNotConfiguredError(LLMUnavailableError):
+    """Raised when neither auth tier has usable credentials — a missing
+    key/project, not a failed call."""
+
+
+class LLMCallFailedError(LLMUnavailableError):
+    """Raised when Gemini WAS configured but the actual API call failed —
+    rate limit, network error, server error, anything. Distinct from
+    LLMNotConfiguredError so logs/errors are honest about which
+    happened, but callers that only want the fallback behavior can catch
+    the shared LLMUnavailableError base instead of both individually."""
 
 
 def generate_response(
@@ -98,7 +117,11 @@ def _call_gemini(
         response_mime_type="application/json" if json_mode else None,
     )
 
-    response = client.models.generate_content(model=MODEL_NAME, contents=contents, config=config)
+    try:
+        response = client.models.generate_content(model=MODEL_NAME, contents=contents, config=config)
+    except Exception as exc:
+        raise LLMCallFailedError(f"Gemini ({tier}) call failed: {exc}") from exc
+
     return response.text
 
 

@@ -190,7 +190,8 @@ def process_entry(payload: EntryPointInput) -> FarmerRequest:
         )
         llm_output = json.loads(llm_service.extract_json_object(raw))
         extracted = _validate_extraction(llm_output, known)
-    except llm_service.LLMNotConfiguredError:
+    except llm_service.LLMUnavailableError as exc:
+        logger.warning("Gemini unavailable for entry-point extraction, falling back: %s", exc)
         extracted = _fallback_extraction(text, known, payload.crop)
     except (json.JSONDecodeError, ValueError) as exc:
         logger.warning("Gemini entry-point extraction could not be parsed, falling back: %s", exc)

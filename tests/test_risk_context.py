@@ -141,3 +141,17 @@ def test_generate_early_warning_uses_real_fallback_when_gemini_unconfigured():
     exercises the real fallback path end to end."""
     text = risk_context._generate_early_warning(["heavy rain expected"], _farmer_request("Ludhiana"))
     assert isinstance(text, str) and "rain" in text.lower()
+
+
+def test_a_live_api_failure_falls_back_gracefully_instead_of_crashing(monkeypatch):
+    """Regression: a real Gemini call that fails after credentials were
+    valid (rate limit, network error, etc.) used to propagate as an
+    unhandled exception — this module only caught 'not configured'."""
+    from app.services import llm_service
+
+    def _boom(*args, **kwargs):
+        raise llm_service.LLMCallFailedError("simulated 429 RESOURCE_EXHAUSTED")
+
+    monkeypatch.setattr(llm_service, "generate_response", _boom)
+    text = risk_context._generate_early_warning(["heavy rain expected"], _farmer_request("Ludhiana"))
+    assert isinstance(text, str) and "rain" in text.lower()

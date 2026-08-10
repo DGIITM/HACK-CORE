@@ -165,3 +165,19 @@ def test_validator_extracts_a_non_wheat_crop_when_genuinely_stated():
     llm_output = {"crop": "mustard", "symptom_description": "pods not filling out", "language": "en"}
     result = entry_point._validate_extraction(llm_output, _KNOWN)
     assert result["crop"] == "mustard"
+
+
+def test_a_live_api_failure_falls_back_gracefully_instead_of_crashing(monkeypatch):
+    """Regression: a real Gemini call that fails after credentials were
+    valid (rate limit, network error, etc.) used to propagate as an
+    unhandled exception all the way to a raw 500 — process_entry() only
+    caught 'not configured', not 'configured but the call failed'."""
+    from app.services import llm_service
+
+    def _boom(*args, **kwargs):
+        raise llm_service.LLMCallFailedError("simulated 429 RESOURCE_EXHAUSTED")
+
+    monkeypatch.setattr(llm_service, "generate_response", _boom)
+    result = entry_point.process_entry(_payload(raw_text="my wheat leaves are turning yellow"))
+    assert result.symptom_description == "my wheat leaves are turning yellow"
+    assert result.crop == "wheat"

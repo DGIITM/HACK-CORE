@@ -217,7 +217,8 @@ def generate_recommendation(req: RecommendationRequest) -> Recommendation:
             )
             llm_output = json.loads(llm_service.extract_json_object(raw))
             decision = _validate_llm_choice(llm_output, candidates)
-        except llm_service.LLMNotConfiguredError:
+        except llm_service.LLMUnavailableError as exc:
+            logger.warning("Gemini unavailable for recommendation reasoning, falling back: %s", exc)
             decision = _validate_llm_choice(_fallback_decision(candidates), candidates)
         except (json.JSONDecodeError, ValueError) as exc:
             logger.warning("Gemini response could not be parsed, falling back: %s", exc)

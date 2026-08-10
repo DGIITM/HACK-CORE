@@ -57,3 +57,56 @@ def test_raises_on_no_json_object_present():
 def test_raises_on_malformed_json():
     with pytest.raises(ValueError):
         llm_service.extract_json_object('{"a": this is not valid}')
+
+
+# --- LLMUnavailableError hierarchy: a live API failure must fall back too --
+#
+# Regression for a real bug found live, not theoretical: the free tier's
+# 20-requests/day cap was hit during testing, and the resulting 429 from
+# google-genai propagated as a raw, unhandled exception all the way to a
+# 500 response — every caller only caught LLMNotConfiguredError ("not
+# configured"), never a failure from a call that WAS attempted. Fixed by
+# having _call_gemini() itself catch anything the API call raises and
+# translate it into LLMCallFailedError, a sibling of LLMNotConfiguredError
+# under a shared LLMUnavailableError base every caller now catches.
+
+def test_not_configured_error_is_an_llm_unavailable_error():
+    assert issubclass(llm_service.LLMNotConfiguredError, llm_service.LLMUnavailableError)
+
+
+def test_call_failed_error_is_an_llm_unavailable_error():
+    assert issubclass(llm_service.LLMCallFailedError, llm_service.LLMUnavailableError)
+
+
+def test_no_credentials_raises_not_configured_error():
+    with pytest.raises(llm_service.LLMNotConfiguredError):
+        llm_service.generate_response(prompt="hello")
+
+
+class _FakeModels:
+    def generate_content(self, **kwargs):
+        raise RuntimeError("429 RESOURCE_EXHAUSTED (simulated)")
+
+
+class _FakeClient:
+    models = _FakeModels()
+
+
+def test_a_failed_api_call_raises_call_failed_error_not_a_raw_exception(monkeypatch):
+    """Simulates exactly what happened live: credentials are valid and a
+    client is obtained, but the actual generate_content call fails."""
+    monkeypatch.setattr(llm_service, "_get_client_and_tier", lambda: (_FakeClient(), "gemini-developer-api"))
+    with pytest.raises(llm_service.LLMCallFailedError):
+        llm_service.generate_response(prompt="hello")
+
+
+def test_a_failed_api_call_is_still_catchable_as_the_shared_base(monkeypatch):
+    """What callers actually do: catch the base class, not the specific
+    subclass, so both 'not configured' and 'call failed' fall back
+    identically."""
+    monkeypatch.setattr(llm_service, "_get_client_and_tier", lambda: (_FakeClient(), "gemini-developer-api"))
+    try:
+        llm_service.generate_response(prompt="hello")
+        assert False, "expected an exception"
+    except llm_service.LLMUnavailableError:
+        pass  # this is the fallback path every module relies on

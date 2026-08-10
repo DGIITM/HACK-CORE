@@ -148,7 +148,8 @@ def measure_impact(req: ImpactRequest) -> ImpactEstimate:
         )
         llm_output = json.loads(llm_service.extract_json_object(raw))
         final = _validate_narration(llm_output, computed)
-    except llm_service.LLMNotConfiguredError:
+    except llm_service.LLMUnavailableError as exc:
+        logger.warning("Gemini unavailable for impact narration, using computed values: %s", exc)
         final = computed
     except (json.JSONDecodeError, ValueError) as exc:
         logger.warning("Gemini impact narration could not be parsed, using computed values: %s", exc)

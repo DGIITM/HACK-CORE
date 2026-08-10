@@ -78,3 +78,18 @@ def test_validator_accepts_small_rounding_differences():
     result = impact._validate_narration(llm_output, _COMPUTED)
     assert result["estimated_effect_pct"] == 12.7
     assert result["roi_per_acre_inr"] == 6420
+
+
+def test_a_live_api_failure_falls_back_gracefully_instead_of_crashing(monkeypatch):
+    """Regression: a real Gemini call that fails after credentials were
+    valid (rate limit, network error, etc.) used to propagate as an
+    unhandled exception — measure_impact() only caught 'not configured'."""
+    from app.services import llm_service
+
+    def _boom(*args, **kwargs):
+        raise llm_service.LLMCallFailedError("simulated 429 RESOURCE_EXHAUSTED")
+
+    monkeypatch.setattr(llm_service, "generate_response", _boom)
+    result = impact.measure_impact(ImpactRequest(farmer_id="f-1"))
+    assert result.data_basis == "simulated"
+    assert len(result.confidence_range) == 2

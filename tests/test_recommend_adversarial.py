@@ -218,3 +218,22 @@ def test_validator_honest_no_match_from_well_behaved_llm_is_respected():
 def test_fallback_decision_only_ever_picks_from_candidates():
     decision = recommend._fallback_decision(_CANDIDATES)
     assert decision["recommended_product"] in {c["product_name"] for c in _CANDIDATES}
+
+
+def test_a_live_api_failure_falls_back_gracefully_instead_of_crashing(monkeypatch):
+    """Regression: a real Gemini call that fails after credentials were
+    valid (rate limit, network error, etc.) used to propagate as an
+    unhandled exception all the way to a raw 500 — generate_recommendation()
+    only caught 'not configured', not 'configured but the call failed'.
+    Never invents a product either way, same as the LLMNotConfiguredError path."""
+    from app.services import llm_service
+
+    def _boom(*args, **kwargs):
+        raise llm_service.LLMCallFailedError("simulated 429 RESOURCE_EXHAUSTED")
+
+    monkeypatch.setattr(llm_service, "generate_response", _boom)
+    rec = recommend.generate_recommendation(
+        _request("wheat", "pink stem borer caterpillar feeding on stems, seedlings dying", "Muktsar")
+    )
+    _assert_never_invented(rec)
+    assert rec.recommended_product in REAL_PRODUCT_NAMES

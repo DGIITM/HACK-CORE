@@ -104,10 +104,8 @@ def _generate_early_warning(reasons: List[str], farmer_request: FarmerRequest) -
         )
         text = raw.strip().strip('"')
         return text or fallback
-    except llm_service.LLMNotConfiguredError:
-        logger.warning(
-            "Vertex AI Gemini isn't configured in this environment — using a templated early_warning instead."
-        )
+    except llm_service.LLMUnavailableError as exc:
+        logger.warning("Gemini unavailable for early_warning generation, using a templated one instead: %s", exc)
         return fallback
 
 
