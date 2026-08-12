@@ -87,12 +87,16 @@ class _EfficacyIndex:
         self._built = True
 
     def search(
-        self, crop: str, query_text: str, soil_type: str, active_pests: List[str], top_k: int
+        self, crop: str, query_text: str, soil_type: str, active_pests: List[str], top_k: int, category: str = None
     ) -> List[Dict]:
         if not self._built:
             self._build()
 
-        matching_crop_rows = [row for row in self._rows if row["crop"].lower() == crop.lower().strip()]
+        matching_crop_rows = [
+            row for row in self._rows 
+            if row["crop"].lower() == crop.lower().strip()
+            and (not category or row.get("category", "") == category)
+        ]
         if not matching_crop_rows:
             return []
 
@@ -119,6 +123,10 @@ class _EfficacyIndex:
         for hit in hits:
             if hit.score < MIN_SIMILARITY:
                 continue
+            if hit.payload["crop"].lower() != crop.lower().strip():
+                continue
+            if category and hit.payload.get("category") != category:
+                continue
             score = hit.score
             if soil_type and soil_type.lower() in hit.payload["typical_soil_type"].lower():
                 score += SOIL_MATCH_BONUS
@@ -138,6 +146,7 @@ def retrieve_candidates(
     symptom_description: str,
     active_pests: List[str],
     soil_type: str,
+    category: str = None,
     top_k: int = TOP_K,
 ) -> List[Dict]:
     """Top 3-5 efficacy-dataset rows most relevant to this farmer's crop
@@ -147,5 +156,5 @@ def retrieve_candidates(
     "closest available" junk — when nothing clears MIN_SIMILARITY.
     """
     return _index.search(
-        crop=crop, query_text=symptom_description, soil_type=soil_type, active_pests=active_pests, top_k=top_k
+        crop=crop, query_text=symptom_description, soil_type=soil_type, active_pests=active_pests, top_k=top_k, category=category
     )

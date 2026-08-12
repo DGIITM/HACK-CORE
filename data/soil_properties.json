@@ -1,0 +1,17 @@
+{
+    "Ludhiana": {
+        "ph": 7.5,
+        "texture": "sandy loam",
+        "organic_matter_percent": 0.45
+    },
+    "Bathinda": {
+        "ph": 8.1,
+        "texture": "sandy",
+        "organic_matter_percent": 0.35
+    },
+    "Ropar": {
+        "ph": 7.0,
+        "texture": "loam",
+        "organic_matter_percent": 0.65
+    }
+}
