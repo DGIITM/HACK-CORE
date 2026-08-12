@@ -9,7 +9,7 @@ from typing import Optional
 from pydantic import BaseModel
 
 from app.schemas.entry_point import FarmerRequest
-from app.schemas.risk_context import RiskContext
+from app.schemas.risk_context import EnvironmentalAssessment, RiskContext
 
 
 class NeighbourProof(BaseModel):
@@ -25,6 +25,7 @@ class Recommendation(BaseModel):
     mode_of_action: str
     neighbour_proof: NeighbourProof
     no_confident_match: bool
+    application_context: Optional[EnvironmentalAssessment] = None
 
 
 class RecommendationRequest(BaseModel):

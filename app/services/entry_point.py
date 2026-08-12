@@ -92,15 +92,25 @@ def _build_user_prompt(text: str, known: Dict) -> str:
 
 
 def _fallback_extraction(text: str, known: Dict, crop_hint: Optional[str]) -> Dict:
-    """Deterministic fallback used when Vertex AI isn't configured (no
-    GOOGLE_CLOUD_PROJECT in this environment) or the call fails: the
-    raw/transcribed text becomes the symptom description directly, with
-    no photo analysis possible (there's no LLM in this path to look at
-    it). crop_hint is a reasonable best-effort signal here specifically
-    — unlike the real extraction path, this mode has no way to genuinely
-    determine crop at all, so a client-supplied hint is better than
-    silently assuming wheat for every submission.
-    """
+    """Deterministic fallback used when Vertex AI isn't configured.
+    Includes a basic keyword safety check to reject blatantly
+    non-agricultural queries (like 'tractor engine') so they don't
+    waste downstream M3/M4 cycles."""
+    
+    lower_text = text.lower()
+    # A generous list of common agricultural terms to allow genuine fallback queries through.
+    ag_keywords = {
+        "wheat", "crop", "plant", "leaf", "leaves", "root", "soil", "yellow", "dry",
+        "wilt", "rust", "pest", "bug", "insect", "disease", "water", "rain", "heat",
+        "seed", "growth", "yield", "fungus", "termite", "blight", "borer", "aphid"
+    }
+    
+    if text.strip() and not any(k in lower_text for k in ag_keywords):
+        raise NoUsableInputError(
+            "I am an agricultural assistant. This does not appear to be a query about crop health, "
+            "so I cannot process it."
+        )
+
     return {
         "crop": (crop_hint or "").strip() or "wheat",
         "location": known["location"],
@@ -142,7 +152,7 @@ def _validate_extraction(llm_output, known: Dict) -> Dict:
 
 
 def process_entry(payload: EntryPointInput) -> FarmerRequest:
-    location = LocationSchema(district=payload.district, state=payload.state)
+    location = LocationSchema(district=payload.district.strip(), state=payload.state.strip())
 
     audio_bytes = _decode_media(payload.audio_base64, "audio")
     photo_bytes = _decode_media(payload.photo_base64, "photo")

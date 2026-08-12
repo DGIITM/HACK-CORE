@@ -48,6 +48,9 @@ PLAIN_MODE_OF_ACTION: Dict[str, str] = {
     "Pseudomonas fluorescens flowering-stage spray": "It's sprayed at flowering to help fight off the disease behind karnal bunt.",
     "Mycorrhiza (VAM) root inoculant": "It helps roots draw in more water and nutrients, making the plant naturally tougher against root disease.",
     "Trichoderma viride + Pseudomonas fluorescens combo": "It protects the roots and helps the plant build its own defence against yellow rust.",
+    "Syngenta Quantis": "It provides amino acids and nutrients that help the plant survive hot and dry weather.",
+    "Syngenta Vixeran": "It uses natural bacteria to help the plant capture nitrogen directly from the air.",
+    "Syngenta Yield Booster X": "It stimulates the plant's growth to increase overall crop yield and health.",
 }
 
 SYSTEM_PROMPT = """You are KrishiSathi's recommendation reasoner for Punjab wheat farmers.
@@ -85,22 +88,101 @@ def _build_user_prompt(farmer_request: FarmerRequest, candidates: List[Dict]) ->
     )
 
 
-def _fallback_decision(candidates: List[Dict]) -> Dict:
+def _fallback_decision(candidates: List[Dict], req: RecommendationRequest = None) -> Dict:
     """Deterministic, retrieval-score-based decision used when Vertex AI
-    isn't configured (no GOOGLE_CLOUD_PROJECT in this environment) or the
-    call fails. It can only ever pick from `candidates` — same constraint
-    as the LLM path, just without an LLM to potentially misbehave."""
+    isn't configured. It calculates a transparent recommendation confidence 
+    based on both textual retrieval similarity and structured agricultural evidence."""
     top = candidates[0]
-    confidence = min(0.95, max(0.4, top["_similarity"]))
+    sim = top.get("_similarity", 0.0)
+    
+    score = 0.0
+    max_possible = 0.0
+    
+    # 1. Text Similarity (up to 15%)
+    score += min(0.15, sim)
+    max_possible += 0.15
+    
+    # Extract M3 signals
+    active_risks = []
+    has_env_data = False
+    
+    if req and req.risk_context:
+        rc = req.risk_context
+        # 2. Crop Match (up to 15%)
+        max_possible += 0.15
+        if req.farmer_request.crop.lower().strip() == top.get("crop", "").lower().strip():
+            score += 0.15
+            
+        # 3. Category Match (up to 20%)
+        if rc.dominant_risk_category:
+            max_possible += 0.20
+            if rc.dominant_risk_category == top.get("category"):
+                score += 0.20
+                
+        if rc.formula_scores or rc.environmental_assessment:
+            has_env_data = True
+            
+        # Heat
+        if rc.formula_scores and (rc.formula_scores.day_heat_stress >= 3.0 or rc.formula_scores.night_heat_stress >= 3.0):
+            active_risks.append("heat")
+        elif rc.environmental_assessment and rc.environmental_assessment.heat_signal in ("orange", "red"):
+            active_risks.append("heat")
+            
+        # Drought
+        if rc.formula_scores and rc.formula_scores.drought_risk_band in ("Elevated", "High", "Critical", "Moderate"):
+            active_risks.append("drought")
+        elif rc.environmental_assessment and rc.environmental_assessment.hydric_stress_active:
+            active_risks.append("drought")
+            
+        # Disease
+        if rc.environmental_assessment and (rc.environmental_assessment.disease_risk_class or 0) >= 3:
+            active_risks.append("disease")
+            # If the disease risk is specifically high in CE Hub disease dataset (e.g. yellow rust)
+            if "rust" in top.get("target_problem", "").lower():
+                active_risks.append("rust")
+            
+        # Nutrients
+        if rc.formula_scores and (rc.formula_scores.nue_band in ("Low", "Very Low") or rc.formula_scores.pue_band in ("Low", "Very Low")):
+            active_risks.append("nutrient")
+            
+    # 4 & 5. Environmental & Problem Match (up to 20% and 30%)
+    target_problem = top.get("target_problem", "").lower()
+    matched_risks = []
+    
+    if has_env_data:
+        max_possible += 0.50 # 20% env + 30% problem
+        matched_risks = [r for r in active_risks if r in target_problem]
+        
+        if matched_risks:
+            score += 0.50  # Env evidence supports the need + Problem matches
+        else:
+            # Yield booster path or text-only matching
+            if top.get("category") == "Yield Booster" and req and req.risk_context and req.risk_context.dominant_risk_category == "Yield Booster":
+                score += 0.50
+            elif req and req.farmer_request and req.farmer_request.symptom_description:
+                # Text fallback for problem matching if M3 didn't detect it via CE hub
+                if any(w in req.farmer_request.symptom_description.lower() for w in ["yellow", "rust", "spot"]) and "rust" in target_problem:
+                    score += 0.15 # Partial problem match based on user text
+                    
+    # Normalize final score
+    confidence = (score / max_possible) if max_possible > 0 else 0.0
+    confidence = min(0.95, round(confidence, 2))
+    
+    if matched_risks:
+        risk_str = " and ".join(matched_risks)
+        reason = f"Your current risk assessment indicates {risk_str} in the crop. {top['product_name']} is a catalogue match for {top.get('target_problem')}, so it is the strongest available product match."
+    else:
+        reason = f"Based on the reported symptom and catalogue evidence, {top['product_name']} is the strongest available match for {top.get('target_problem', 'the described issue')}."
+
+    # Anti-hallucination / weak match fallback
+    no_confident_match = (confidence < 0.35) or (sim < 0.12)
+
     return {
         "recommended_product": top["product_name"],
         "confidence_score": confidence,
-        "plain_language_reason": (
-            f"What you're describing matches {top['target_problem']} patterns seen on wheat "
-            "nearby, and this product is commonly used for that."
-        ),
-        "mode_of_action": PLAIN_MODE_OF_ACTION.get(top["product_name"], top["mode_of_action"]),
-        "no_confident_match": confidence < 0.5,
+        "plain_language_reason": reason,
+        "mode_of_action": PLAIN_MODE_OF_ACTION.get(top["product_name"], top.get("mode_of_action", "")),
+        "no_confident_match": no_confident_match,
     }
 
 
@@ -114,7 +196,7 @@ def _real_neighbour_proof(product_name: str, district: str) -> NeighbourProof:
     if not outcomes:
         return NeighbourProof(farmers_nearby=0, avg_outcome="not enough verified outcomes yet", available=False)
 
-    yields = [float(o["yield_result"]) for o in outcomes if "yield_result" in o]
+    yields = [float(o["yield_result"]) for o in outcomes if o.get("yield_result") is not None]
     avg_yield = sum(yields) / len(yields) if yields else 0.0
     above_baseline = sum(1 for y in yields if y > impact_data.BASE_YIELD_QUINTALS_PER_ACRE)
 
@@ -197,11 +279,21 @@ def generate_recommendation(req: RecommendationRequest) -> Recommendation:
     )
     soil_type = data_foundation.get_soil_type(district) or ""
 
+    # PS-3 category gating: use dominant_risk_category from risk context to
+    # pre-filter the candidate pool so the LLM only sees products relevant
+    # to the highest-priority risk signal.
+    dominant_category = (
+        req.risk_context.dominant_risk_category
+        if req.risk_context is not None
+        else None
+    )
+
     candidates = retrieval.retrieve_candidates(
         crop=farmer_request.crop,
         symptom_description=farmer_request.symptom_description,
         active_pests=active_pests,
         soil_type=soil_type,
+        category=dominant_category,
     )
 
     if not candidates:
@@ -219,10 +311,10 @@ def generate_recommendation(req: RecommendationRequest) -> Recommendation:
             decision = _validate_llm_choice(llm_output, candidates)
         except llm_service.LLMUnavailableError as exc:
             logger.warning("Gemini unavailable for recommendation reasoning, falling back: %s", exc)
-            decision = _validate_llm_choice(_fallback_decision(candidates), candidates)
+            decision = _validate_llm_choice(_fallback_decision(candidates, req), candidates)
         except (json.JSONDecodeError, ValueError) as exc:
             logger.warning("Gemini response could not be parsed, falling back: %s", exc)
-            decision = _validate_llm_choice(_fallback_decision(candidates), candidates)
+            decision = _validate_llm_choice(_fallback_decision(candidates, req), candidates)
 
     # M9: a small, capped nudge from real logged positive outcomes for
     # this product/district — exactly zero when there's no outcome data
@@ -236,6 +328,12 @@ def generate_recommendation(req: RecommendationRequest) -> Recommendation:
         # real recommendation activity to aggregate — not logged for a
         # no_confident_match, since there's no product to attribute it to.
         recommendation_log.log_recommendation(district, decision["recommended_product"], decision["confidence_score"])
+        
+        # Explicit warning if M3 failed (weather unavailable) but a catalogue match was still found.
+        if req.risk_context and req.risk_context.environmental_assessment.data_status == "unavailable":
+            warning = "Product catalogue match found, but application suitability cannot currently be assessed because weather data is unavailable."
+            if warning not in decision["plain_language_reason"]:
+                decision["plain_language_reason"] = decision["plain_language_reason"].rstrip(".") + ". " + warning
 
     return Recommendation(
         recommended_product=decision["recommended_product"],
@@ -244,4 +342,5 @@ def generate_recommendation(req: RecommendationRequest) -> Recommendation:
         mode_of_action=decision["mode_of_action"],
         neighbour_proof=neighbour_proof,
         no_confident_match=decision["no_confident_match"],
+        application_context=(req.risk_context.environmental_assessment if req.risk_context else None),
     )

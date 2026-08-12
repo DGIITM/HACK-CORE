@@ -23,29 +23,49 @@ logger = logging.getLogger(__name__)
 
 
 def log_outcome(payload: OutcomeLogInput) -> OutcomeLog:
-    batch_check = data_foundation.check_batch(payload.batch_number)
-    batch_verified = batch_check["valid"]
-    if not batch_verified:
-        logger.warning(
-            "Outcome logged against an unverified/counterfeit batch: farmer_id=%s batch_number=%s",
-            payload.farmer_id,
-            payload.batch_number,
-        )
+    # Check if a log already exists for this farmer and product
+    existing = None
+    doc_id = None
+    for r in outcome_store._all_records(include_doc_id=True):
+        if r.get("farmer_id") == payload.farmer_id and r.get("product_used") == payload.product_used:
+            existing = r
+            doc_id = r["_doc_id"]
+            break
 
-    record = {
-        "farmer_id": payload.farmer_id,
-        "product_used": payload.product_used,
-        "batch_verified": batch_verified,
-        "application_date": payload.application_date,
-        "observed_outcome": payload.observed_outcome,
-        "yield_result": payload.yield_result,
-        # Persisted for M9's get_confidence_boost()/get_outcomes_by_district()
-        # to query — not part of OutcomeLog's own contract, so it's simply
-        # dropped (pydantic ignores unknown keys) when building the response below.
-        "district": payload.district,
-    }
+    if existing:
+        # Follow-up: merge new observations into the existing application record
+        batch_verified = existing.get("batch_verified", False)
+        record = {
+            "farmer_id": payload.farmer_id,
+            "product_used": payload.product_used,
+            "batch_verified": batch_verified,
+            "application_date": existing.get("application_date") or payload.application_date,
+            "observed_outcome": payload.observed_outcome if payload.observed_outcome is not None else existing.get("observed_outcome"),
+            "yield_result": payload.yield_result if payload.yield_result is not None else existing.get("yield_result"),
+            "district": existing.get("district") or payload.district,
+        }
+    else:
+        # New application
+        batch_check = data_foundation.check_batch(payload.batch_number)
+        batch_verified = batch_check["valid"]
+        if not batch_verified:
+            logger.warning(
+                "Outcome logged against an unverified/counterfeit batch: farmer_id=%s batch_number=%s",
+                payload.farmer_id,
+                payload.batch_number,
+            )
 
-    doc_id = f"{payload.farmer_id}-{uuid.uuid4().hex[:8]}"
+        record = {
+            "farmer_id": payload.farmer_id,
+            "product_used": payload.product_used,
+            "batch_verified": batch_verified,
+            "application_date": payload.application_date,
+            "observed_outcome": payload.observed_outcome,
+            "yield_result": payload.yield_result,
+            "district": payload.district,
+        }
+        doc_id = f"{payload.farmer_id}-{uuid.uuid4().hex[:8]}"
+
     synced = outcome_store.save_outcome(doc_id, record)
 
     return OutcomeLog(**record, synced=synced)
