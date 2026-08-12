@@ -126,15 +126,17 @@ def get_outcome(doc_id: str) -> Optional[Dict]:
     return data
 
 
-def _all_records() -> List[Dict]:
+def _all_records(include_doc_id: bool = False) -> List[Dict]:
     _init_db()
     conn = sqlite3.connect(DB_PATH)
-    rows = conn.execute("SELECT payload, synced FROM outcome_logs").fetchall()
+    rows = conn.execute("SELECT doc_id, payload, synced FROM outcome_logs").fetchall()
     conn.close()
     records = []
-    for payload, synced in rows:
+    for doc_id, payload, synced in rows:
         data = json.loads(payload)
         data["synced"] = bool(synced)
+        if include_doc_id:
+            data["_doc_id"] = doc_id
         records.append(data)
     return records
 

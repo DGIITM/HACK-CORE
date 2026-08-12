@@ -20,8 +20,8 @@ class OutcomeLogInput(BaseModel):
     product_used: str
     batch_number: str
     application_date: str
-    observed_outcome: str
-    yield_result: float
+    observed_outcome: Optional[str] = None
+    yield_result: Optional[float] = None
     # Not part of CLAUDE.md's locked OutcomeLog output contract (added
     # only here, on the input), and not returned in the response either
     # — it's threaded into the internally persisted record so M9's
@@ -36,6 +36,6 @@ class OutcomeLog(BaseModel):
     product_used: str
     batch_verified: bool
     application_date: str
-    observed_outcome: str
-    yield_result: float
+    observed_outcome: Optional[str] = None
+    yield_result: Optional[float] = None
     synced: bool

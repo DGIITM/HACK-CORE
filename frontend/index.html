@@ -520,8 +520,12 @@
                       <div v-if="interaction.stages.risk.status === 'done'" class="stage-card">
                         <span class="module-badge">M3 · Risk Intelligence</span>
                         <template v-if="interaction.stages.risk.data">
-                          <div><span class="field-label">Readiness score:</span> {{ interaction.stages.risk.data.readiness_score }} — {{ interaction.stages.risk.data.should_proceed ? 'OK to proceed' : 'better to wait' }}</div>
+                          <div><span class="field-label">Application suitability:</span> {{ interaction.stages.risk.data.environmental_assessment.application_suitability }}</div>
                           <div><span class="field-label">Weather:</span> {{ interaction.stages.risk.data.weather_summary }}</div>
+                          <div class="small text-muted"><span class="field-label">Data:</span> {{ interaction.stages.risk.data.environmental_assessment.data_status }} · {{ interaction.stages.risk.data.environmental_assessment.source }}</div>
+                          <div v-if="interaction.stages.risk.data.environmental_assessment.window_start" class="small"><span class="field-label">Window:</span> {{ interaction.stages.risk.data.environmental_assessment.window_start }} to {{ interaction.stages.risk.data.environmental_assessment.window_end }}</div>
+                          <div v-if="interaction.stages.risk.data.environmental_assessment.suitability_reasons.length" class="small"><span class="field-label">Conditions:</span> {{ interaction.stages.risk.data.environmental_assessment.suitability_reasons.join('; ') }}</div>
+                          <div v-if="interaction.stages.risk.data.environmental_assessment.alerts.length" class="small"><span class="field-label">Context:</span> {{ interaction.stages.risk.data.environmental_assessment.alerts.join('; ') }}</div>
                           <div v-if="interaction.stages.risk.data.active_pests.length"><span class="field-label">Active pests:</span> {{ interaction.stages.risk.data.active_pests.join(', ') }}</div>
                           <div v-if="interaction.stages.risk.data.early_warning" class="early-warning mt-2">⚠️ {{ interaction.stages.risk.data.early_warning }}</div>
                         </template>
@@ -551,6 +555,9 @@
                               <div class="product-name">{{ interaction.stages.recommend.data.recommended_product }}</div>
                               <div class="note-label mt-2">Mode of action</div>
                               <div class="small">{{ interaction.stages.recommend.data.mode_of_action }}</div>
+                              <div v-if="interaction.stages.recommend.data.application_context" class="neighbour-stat mt-2">
+                                Application conditions: {{ interaction.stages.recommend.data.application_context.application_suitability }}
+                              </div>
                               <div class="neighbour-stat mt-2" v-if="interaction.stages.recommend.data.neighbour_proof.available">
                                 👥 {{ interaction.stages.recommend.data.neighbour_proof.farmers_nearby }} farmers nearby saw
                                 {{ interaction.stages.recommend.data.neighbour_proof.avg_outcome }}
@@ -622,10 +629,10 @@
                             <input class="form-control form-control-sm" type="date" v-model="interaction.stages.log.form.application_date" required />
                           </div>
                           <div class="col-6">
-                            <input class="form-control form-control-sm" type="number" step="0.1" v-model.number="interaction.stages.log.form.yield_result" placeholder="Yield (quintals/acre)" required />
+                            <input class="form-control form-control-sm" type="number" step="0.1" v-model.number="interaction.stages.log.form.yield_result" placeholder="Yield (quintals/acre) (Optional)" />
                           </div>
                           <div class="col-12">
-                            <input class="form-control form-control-sm" v-model="interaction.stages.log.form.observed_outcome" placeholder="What did you observe?" required />
+                            <input class="form-control form-control-sm" v-model="interaction.stages.log.form.observed_outcome" placeholder="What did you observe? (Optional)" />
                           </div>
                           <div class="col-12">
                             <button class="btn btn-sm btn-accent" type="submit" :disabled="interaction.stages.log.status === 'active'">
@@ -1128,8 +1135,8 @@ const app = createApp({
             product_used: form.product_used || (interaction.stages.recommend.data && interaction.stages.recommend.data.recommended_product) || "",
             batch_number: form.batch_number,
             application_date: form.application_date,
-            observed_outcome: form.observed_outcome,
-            yield_result: form.yield_result,
+            observed_outcome: form.observed_outcome || null,
+            yield_result: form.yield_result === "" ? null : form.yield_result,
             district: district,
           }),
         });
