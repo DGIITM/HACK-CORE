@@ -1,0 +1,20 @@
+{
+    "Wheat": {
+        "TMaxOptimum": 25.0,
+        "TmaxLimit": 32.0,
+        "TMinOptimum": 15.0,
+        "TMinLimit": 20.0,
+        "TMinNoFrost": 2.0,
+        "TminFrost": -2.0,
+        "GDD_optimal_min": 2000.0,
+        "GDD_optimal_max": 2500.0,
+        "Precipitation_Optimal_min": 1000.0,
+        "Precipitation_Optimal_max": 1500.0,
+        "pH_optimal_min": 6.0,
+        "pH_optimal_max": 7.5,
+        "SM_optimal_min": 50.0,
+        "SM_optimal_max": 70.0,
+        "N_Optimal_min": 100.0,
+        "N_Optimal_max": 140.0
+    }
+}

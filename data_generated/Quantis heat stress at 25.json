@@ -1,0 +1,3770 @@
+[
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-01",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-02",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-03",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-04",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-05",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-06",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-07",
+        "value": "orange",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-08",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-09",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-10",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-11",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-12",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-13",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-14",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-15",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-16",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-17",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-18",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-19",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-20",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-21",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025--1-2-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025--1-2-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-23",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-24",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-25",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-26",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-27",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-28",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-29",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-30",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2025-12-31",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-01",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-02",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-03",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-04",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-05",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-06",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-07",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-08",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-09",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-10",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-11",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-12",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-13",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026--0-1-",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026--0-1-",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-15",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-16",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-17",
+        "value": "orange",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-18",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-19",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-20",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-21",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-22",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-23",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-24",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-25",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-26",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-27",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-28",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-29",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-30",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-01-31",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-01",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-02",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-03",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-04",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-05",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026--0-2-",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026--0-2-",
+        "value": "orange",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-07",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-08",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-09",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-10",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-11",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-12",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-13",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-14",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-15",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-16",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-17",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-18",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-19",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-20",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-21",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-22",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-23",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-24",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-25",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-26",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-27",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-02-28",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026--0-3-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026--0-3-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-02",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-03",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-04",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-05",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-06",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-07",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-08",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-09",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-10",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-11",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-12",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-13",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-14",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-15",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-16",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-17",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-18",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-19",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-20",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-21",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-22",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-23",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026--0-3-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026--0-3-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-25",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-26",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-27",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-28",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-29",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-30",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-03-31",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-01",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-02",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-03",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-04",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-05",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-06",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-07",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-08",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-09",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-10",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-11",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-12",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-13",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-14",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-15",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026--0-4-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026--0-4-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-17",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-18",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-19",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-20",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-21",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-22",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-23",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-24",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-25",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-26",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-27",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-28",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-29",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.9,
+        "longitude": 75.85,
+        "date": "2026-04-30",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-01",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-02",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-03",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-04",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-05",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-06",
+        "value": "orange",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-07",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-08",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-09",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-10",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-11",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-12",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-13",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-14",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-15",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-16",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-17",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-18",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-19",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-20",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-21",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025--1-2-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025--1-2-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-23",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-24",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-25",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-26",
+        "value": "orange",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-27",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-28",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-29",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-30",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2025-12-31",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-01",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-02",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-03",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-04",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-05",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-06",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-07",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-08",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-09",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-10",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-11",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-12",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-13",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026--0-1-",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026--0-1-",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-15",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-16",
+        "value": "orange",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-17",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-18",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-19",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-20",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-21",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-22",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-23",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-24",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-25",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-26",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-27",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-28",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-29",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-30",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-01-31",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-01",
+        "value": "orange",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-02",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-03",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-04",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-05",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026--0-2-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026--0-2-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-07",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-08",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-09",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-10",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-11",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-12",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-13",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-14",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-15",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-16",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-17",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-18",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-19",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-20",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-21",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-22",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-23",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-24",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-25",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-26",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-27",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-02-28",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026--0-3-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026--0-3-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-02",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-03",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-04",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-05",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-06",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-07",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-08",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-09",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-10",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-11",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-12",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-13",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-14",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-15",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-16",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-17",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-18",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-19",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-20",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-21",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-22",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-23",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026--0-3-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026--0-3-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-25",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-26",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-27",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-28",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-29",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-30",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-03-31",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-01",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-02",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-03",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-04",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-05",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-06",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-07",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-08",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-09",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-10",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-11",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-12",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-13",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-14",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-15",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026--0-4-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026--0-4-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-17",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-18",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-19",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-20",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-21",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-22",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-23",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-24",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-25",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-26",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-27",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-28",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-29",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.21,
+        "longitude": 74.95,
+        "date": "2026-04-30",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-01",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-02",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-03",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-04",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-05",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-06",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-07",
+        "value": "orange",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-08",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-09",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-10",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-11",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-12",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-13",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-14",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-15",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-16",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-17",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-18",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-19",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-20",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-21",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025--1-2-",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025--1-2-",
+        "value": "orange",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-23",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-24",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-25",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-26",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-27",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-28",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-29",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-30",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2025-12-31",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-01",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-02",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-03",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-04",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-05",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-06",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-07",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-08",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-09",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-10",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-11",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-12",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-13",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026--0-1-",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026--0-1-",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-15",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-16",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-17",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-18",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-19",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-20",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-21",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-22",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-23",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-24",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-25",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-26",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-27",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-28",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-29",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-30",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-01-31",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-01",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-02",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-03",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-04",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-05",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026--0-2-",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026--0-2-",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-07",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-08",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-09",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-10",
+        "value": "orange",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-11",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-12",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-13",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-14",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-15",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-16",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-17",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-18",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-19",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-20",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-21",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-22",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-23",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-24",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-25",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-26",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-27",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-02-28",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026--0-3-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026--0-3-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-02",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-03",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-04",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-05",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-06",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-07",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-08",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-09",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-10",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-11",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-12",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-13",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-14",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-15",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-16",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-17",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-18",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-19",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-20",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-21",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-22",
+        "value": "orange",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-23",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026--0-3-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026--0-3-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-25",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-26",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-27",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-28",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-29",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-30",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-03-31",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-01",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-02",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-03",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-04",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-05",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-06",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-07",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-08",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-09",
+        "value": "green",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-10",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-11",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-12",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-13",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-14",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-15",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026--0-4-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026--0-4-",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-17",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-18",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-19",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-20",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-21",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-22",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-23",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-24",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-25",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-26",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-27",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-28",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-29",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    },
+    {
+        "latitude": 30.97,
+        "longitude": 76.53,
+        "date": "2026-04-30",
+        "value": "red",
+        "modelID": "Quantis",
+        "property": "Heat Stress"
+    }
+]
