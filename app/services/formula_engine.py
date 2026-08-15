@@ -54,11 +54,22 @@ def compute_drought_index(rainfall_mm: float, evapotranspiration_mm: float, soil
     di = ((rainfall_mm - evapotranspiration_mm) + soil_moisture) / avg_temp
     return di
 
+DROUGHT_MEDIUM_RISK_THRESHOLD = -0.30
+# Provisional, not from the original spec. The spec-guessed cutoff (DI > 1.0
+# => "No risk") was checked against 63 real samples of organizer-provided CE
+# Hub/Meteoblue data (Ludhiana/Bathinda/Ropar, Dec 2025-Apr 2026): observed DI
+# ranged -0.54 to 2.64, median -0.23 — "No risk" was effectively unreachable,
+# so this flagged "Medium risk" on 95% of days regardless of actual dryness.
+# -0.30 is the ~25th percentile of that same observed distribution, chosen so
+# the flag actually discriminates the driest quarter of conditions rather than
+# firing almost always. TODO: replace with the real threshold once the
+# Algorithm Logic doc (from the 2026-08-06 hackathon@annam.ai email) is
+# confirmed — this is a data-driven stand-in, not a verified spec value.
 def get_drought_risk_category(di: float) -> str:
-    if di > 1.0:
+    if di > DROUGHT_MEDIUM_RISK_THRESHOLD:
         return "No risk"
     else:
-        return "Medium risk" # per spec: DI = 1 Medium risk, DI < 1 Medium risk
+        return "Medium risk"
 
 def compute_yield_risk(actual_gdd: float, opt_gdd_min: float, opt_gdd_max: float,
                        actual_p: float, opt_p_min: float, opt_p_max: float,

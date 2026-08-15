@@ -23,23 +23,23 @@
      Noto Sans Devanagari/Gurmukhi — the mock's own sample copy is all
      Latin/transliterated, so it never surfaces this. */
   :root {
-    --bg-app: #161826;
-    --bg-panel: #232532;
-    --border: #3f424d;
-    --border-soft: rgba(233, 233, 237, 0.16);
-    --border-soft-2: rgba(233, 233, 237, 0.1);
-    --text: #e9e9ed;
-    --text-70: rgba(233, 233, 237, 0.7);
-    --text-55: rgba(233, 233, 237, 0.55);
-    --text-45: rgba(233, 233, 237, 0.45);
-    --text-40: rgba(233, 233, 237, 0.4);
-    --accent: #9184d9;
-    --accent-soft-bg: #423a6a;
-    --accent-soft-text: #f5f4ff;
-    --neutral-badge-bg: #3f424d;
-    --neutral-badge-text: #f3f5fe;
+    --bg-app: #141f17;
+    --bg-panel: #1f2e23;
+    --border: #435043;
+    --border-soft: rgba(233, 237, 233, 0.16);
+    --border-soft-2: rgba(233, 237, 233, 0.1);
+    --text: #e9ede9;
+    --text-70: rgba(233, 237, 233, 0.7);
+    --text-55: rgba(233, 237, 233, 0.55);
+    --text-45: rgba(233, 237, 233, 0.45);
+    --text-40: rgba(233, 237, 233, 0.4);
+    --accent: #7cc96a;
+    --accent-soft-bg: #2f4a34;
+    --accent-soft-text: #eafbe9;
+    --neutral-badge-bg: #435043;
+    --neutral-badge-text: #f3fef3;
     --danger: #f2555a;
-    --gradient-band: linear-gradient(135deg, #262a60, #353b80);
+    --gradient-band: linear-gradient(135deg, #1f3a24, #2f5c37);
   }
 
   * {
@@ -90,8 +90,8 @@
     font-weight: 600;
   }
   .btn-accent:hover, .btn-accent:focus {
-    background: #a89aea;
-    border-color: #a89aea;
+    background: #a3e08f;
+    border-color: #a3e08f;
     color: #161826;
   }
   .btn-ghost {
@@ -120,15 +120,6 @@
     padding: 1.25rem 0;
   }
   .landing-hero { max-width: 640px; padding: 0.5rem 0 2rem; }
-  .landing-eyebrow {
-    display: inline-block;
-    font-weight: 500;
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.9rem;
-  }
   .landing-hero h1 {
     font-weight: 500;
     font-size: 2.4rem;
@@ -374,25 +365,25 @@
 
   <!-- ================= Landing / role select ================= -->
   <div v-if="view === 'landing'" class="container" style="max-width: 900px;">
-    <div class="landing-nav">
+    <div class="landing-nav d-flex align-items-center justify-content-between">
       <span class="wordmark">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9184d9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c8 0 16-4 16-16-12 0-16 8-16 16Z"/><path d="M5 19c3-4 7-7 11-11"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7cc96a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c8 0 16-4 16-16-12 0-16 8-16 16Z"/><path d="M5 19c3-4 7-7 11-11"/></svg>
         <span class="wordmark-text">KrishiSathi</span>
       </span>
+      <div class="lang-segment">
+        <button type="button" :class="{ active: language === 'pa' }" @click="language = 'pa'">ਪੰਜਾਬੀ</button>
+        <button type="button" :class="{ active: language === 'hi' }" @click="language = 'hi'">हिंदी</button>
+        <button type="button" :class="{ active: language === 'en' }" @click="language = 'en'">EN</button>
+      </div>
     </div>
 
     <div class="landing-hero">
-      <span class="landing-eyebrow">AI crop advisory · Punjab wheat</span>
-      <h1>Ask about your crop.<br>See exactly how the answer was reached.</h1>
-      <p>Every step — risk check, recommendation, evidence — shows its own reasoning, not just a final answer.</p>
+      <h1>{{ landingText.headline }}</h1>
+      <p>{{ landingText.subtext }}</p>
     </div>
 
     <div class="trust-gap-band">
-      <p>
-        Biological products work — but farmers can't verify that before buying,
-        companies can't prove it after selling, and the retailer in between has
-        no evidence to offer either. It's a trust gap, not a technology gap.
-      </p>
+      <p>{{ landingText.trustGap }}</p>
     </div>
 
     <div class="role-cards mb-5">
@@ -406,10 +397,10 @@
         <div class="role-card-icon">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c8 0 16-4 16-16-12 0-16 8-16 16Z"/><path d="M5 19c3-4 7-7 11-11"/></svg>
         </div>
-        <div class="role-card-title">I'm a Farmer</div>
-        <p class="role-card-sub">Describe a crop problem and get a trusted recommendation.</p>
+        <div class="role-card-title">{{ landingText.farmerTitle }}</div>
+        <p class="role-card-sub">{{ landingText.farmerSub }}</p>
         <span class="btn-chip" style="align-self:flex-start;">
-          Continue as farmer
+          {{ landingText.farmerCta }}
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="m14 6 6 6-6 6"/></svg>
         </span>
       </div>
@@ -423,10 +414,10 @@
         <div class="role-card-icon">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9 5 4h14l1 5"/><path d="M4 9h16v10H4z"/><path d="M9 19v-5h6v5"/></svg>
         </div>
-        <div class="role-card-title">I'm a Retailer</div>
-        <p class="role-card-sub">See what's being recommended and verified in your district.</p>
+        <div class="role-card-title">{{ landingText.retailerTitle }}</div>
+        <p class="role-card-sub">{{ landingText.retailerSub }}</p>
         <span class="btn-chip" style="align-self:flex-start;">
-          Continue as retailer
+          {{ landingText.retailerCta }}
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="m14 6 6 6-6 6"/></svg>
         </span>
       </div>
@@ -438,7 +429,7 @@
     <div class="topbar py-3 mb-4">
       <div class="container d-flex align-items-center">
         <span class="wordmark" @click="view = 'landing'">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9184d9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c8 0 16-4 16-16-12 0-16 8-16 16Z"/><path d="M5 19c3-4 7-7 11-11"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7cc96a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c8 0 16-4 16-16-12 0-16 8-16 16Z"/><path d="M5 19c3-4 7-7 11-11"/></svg>
           <span class="wordmark-text">KrishiSathi</span>
         </span>
         <div class="view-tabs">
@@ -839,6 +830,46 @@
 <script>
 const { createApp } = Vue;
 
+// Landing-page copy, kept together and out of the markup per CLAUDE.md's
+// "keep farmer-facing strings in a separate place, not hardcoded" rule —
+// simple enough for a farmer with no assumed literacy, specific enough
+// (checked first, proven after) to still land with a corporate reader.
+const LANDING_COPY = {
+  pa: {
+    headline: "ਤੁਹਾਡੀ ਕਣਕ ਦੀ ਫ਼ਸਲ ਲਈ ਭਰੋਸੇਯੋਗ ਸਲਾਹ",
+    subtext: "ਆਪਣੀ ਸਮੱਸਿਆ ਦੱਸੋ। ਅਸੀਂ ਪਹਿਲਾਂ ਦੇਖਦੇ ਹਾਂ ਕਿ ਸਹੀ ਸਮਾਂ ਹੈ ਜਾਂ ਨਹੀਂ, ਫਿਰ ਸਾਫ਼ ਕਾਰਨ ਨਾਲ ਉਤਪਾਦ ਦੱਸਦੇ ਹਾਂ — ਅਤੇ ਦਿਖਾਉਂਦੇ ਹਾਂ ਕਿ ਇਹ ਨੇੜਲੇ ਕਿਸਾਨਾਂ ਲਈ ਕਿਵੇਂ ਕਾਰਗਰ ਰਿਹਾ।",
+    trustGap: "ਕਿਸਾਨ ਖਰੀਦਣ ਤੋਂ ਪਹਿਲਾਂ ਇਹ ਨਹੀਂ ਜਾਣ ਸਕਦੇ ਕਿ ਉਤਪਾਦ ਅਸਰ ਕਰੇਗਾ ਜਾਂ ਨਹੀਂ। ਦੁਕਾਨਦਾਰ ਵੇਚਣ ਤੋਂ ਬਾਅਦ ਇਹ ਸਾਬਤ ਨਹੀਂ ਕਰ ਸਕਦੇ। ਅਸੀਂ ਇਹੀ ਕਮੀ ਦੂਰ ਕਰਦੇ ਹਾਂ — ਹਰ ਸਲਾਹ ਪਹਿਲਾਂ ਜਾਂਚੀ ਜਾਂਦੀ ਹੈ ਤੇ ਬਾਅਦ ਵਿੱਚ ਸਾਬਤ ਕੀਤੀ ਜਾਂਦੀ ਹੈ।",
+    farmerTitle: "ਮੈਂ ਕਿਸਾਨ ਹਾਂ",
+    farmerSub: "ਆਪਣੀ ਫ਼ਸਲ ਦੀ ਸਮੱਸਿਆ ਦੱਸੋ ਅਤੇ ਭਰੋਸੇਯੋਗ ਸਲਾਹ ਲਓ।",
+    farmerCta: "ਕਿਸਾਨ ਵਜੋਂ ਅੱਗੇ ਵਧੋ",
+    retailerTitle: "ਮੈਂ ਦੁਕਾਨਦਾਰ ਹਾਂ",
+    retailerSub: "ਆਪਣੇ ਇਲਾਕੇ ਵਿੱਚ ਸੁਝਾਈ ਗਈ ਅਤੇ ਸਾਬਤ ਹੋਈ ਸਲਾਹ ਵੇਖੋ।",
+    retailerCta: "ਦੁਕਾਨਦਾਰ ਵਜੋਂ ਅੱਗੇ ਵਧੋ",
+  },
+  hi: {
+    headline: "अपनी गेहूं की फ़सल के लिए भरोसेमंद सलाह",
+    subtext: "अपनी समस्या बताएं। हम पहले जांचते हैं कि सही समय है या नहीं, फिर साफ़ कारण के साथ उत्पाद बताते हैं — और दिखाते हैं कि यह आसपास के किसानों के लिए कैसे कारगर रहा।",
+    trustGap: "किसान खरीदने से पहले नहीं जान पाते कि उत्पाद असर करेगा या नहीं। दुकानदार बेचने के बाद यह साबित नहीं कर पाते। हम यही कमी दूर करते हैं — हर सलाह पहले जांची जाती है और बाद में साबित की जाती है।",
+    farmerTitle: "मैं किसान हूं",
+    farmerSub: "अपनी फ़सल की समस्या बताएं और भरोसेमंद सलाह पाएं।",
+    farmerCta: "किसान के रूप में आगे बढ़ें",
+    retailerTitle: "मैं दुकानदार हूं",
+    retailerSub: "अपने क्षेत्र में सुझाई गई और साबित हुई सलाह देखें।",
+    retailerCta: "दुकानदार के रूप में आगे बढ़ें",
+  },
+  en: {
+    headline: "Trusted advice for your wheat crop",
+    subtext: "Tell us the problem. We check if the time is right, then recommend a product with a clear reason — and show proof it worked for farmers nearby.",
+    trustGap: "Farmers can't check if a product works before buying it. Sellers can't prove it worked after. We close that gap — every recommendation is checked first, and proven afterward.",
+    farmerTitle: "I'm a Farmer",
+    farmerSub: "Describe your crop problem and get trusted advice.",
+    farmerCta: "Continue as farmer",
+    retailerTitle: "I'm a Retailer",
+    retailerSub: "See what's recommended and proven in your area.",
+    retailerCta: "Continue as retailer",
+  },
+};
+
 const app = createApp({
   data() {
     return {
@@ -866,6 +897,11 @@ const app = createApp({
       retailerData: null,
       retailerLoading: false,
     };
+  },
+  computed: {
+    landingText() {
+      return LANDING_COPY[this.language] || LANDING_COPY.en;
+    },
   },
   methods: {
     goToChat() {

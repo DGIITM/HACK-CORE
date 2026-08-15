@@ -1,0 +1,9 @@
+{
+    "data_basis": "placeholder — commonly-cited PAU (Punjab Agricultural University) Package of Practices figures for irrigated, timely-sown wheat, used as a stand-in default application rate. Not sourced from a specific farmer's actual application record, and not verified against the current-year PAU Package of Practices document — should be confirmed before being presented as an authoritative recommendation.",
+    "notes": "P_applied_kg_ha is expressed as P2O5 (the form PAU recommendations are conventionally published in), not elemental phosphorus. K_applied_kg_ha is 0 because PAU does not recommend blanket potash application for Punjab wheat — most Punjab soils test sufficient in potassium, and potash is only recommended where a soil test shows deficiency, which this system does not currently collect.",
+    "Wheat": {
+        "N_applied_kg_ha": 125.0,
+        "P_applied_kg_ha": 62.0,
+        "K_applied_kg_ha": 0.0
+    }
+}
