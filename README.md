@@ -46,13 +46,14 @@ Then open http://localhost:8000.
 ## Current status
 
 Every module (M1–M9) runs real logic — Gemini (Developer API primary,
-Vertex AI fallback), Qdrant retrieval, Open-Meteo weather, Cloud
-Translation/TTS/STT, a real difference-in-differences causal model — with
-a real, working, honestly-labeled fallback wherever live credentials
-aren't configured. Nothing is a stub anymore; `grep -rn "STUB" app/` finds
-only a couple of deliberately out-of-scope items (e.g. Firebase Storage
-upload for photos, BigQuery migration for M2's data), each documented in
-place.
+Vertex AI fallback), Qdrant retrieval, a deterministic climate-stress
+formula engine backed by organizer-provided CE Hub and Meteoblue data,
+Open-Meteo live weather, Cloud Translation/TTS/STT, a real
+difference-in-differences causal model — with a real, working,
+honestly-labeled fallback wherever live credentials aren't configured.
+Nothing is a stub anymore; `grep -rn "STUB" app/` finds only a couple of
+deliberately out-of-scope items (e.g. Firebase Storage upload for
+photos, BigQuery migration for M2's data), each documented in place.
 
 ## Layout
 
@@ -64,10 +65,15 @@ app/
     dependencies.py
   schemas/         # one file per module — the data-contract shapes
   services/        # one file per module — the real logic lives here
+                    #   formula_engine.py — deterministic heat/frost/
+                    #   drought/NUE/PUE scoring used by M3
   routes/          # one file per module — thin, calls into services/
 frontend/
   index.html       # landing page + chat UI + retailer view (Vue 3 + Bootstrap 5, CDN only)
 data/              # M2's datasets (JSON) + runtime SQLite caches (gitignored)
+data_generated/    # organizer-provided CE Hub + Meteoblue data (Disease
+                    #   Risk, Agro Recommendation, Quantis heat stress,
+                    #   Meteoblue weather archive) feeding M3
 tests/             # one file per module, plus adversarial/regression suites
 setup_and_run.py   # one-command local setup + launch (see Quick start above)
 ```
